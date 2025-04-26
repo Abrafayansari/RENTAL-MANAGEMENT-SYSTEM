@@ -1,10 +1,10 @@
 {
     "compilerOptions": {
-      "baseUrl": ".",
+      "baseUrl": ".",  // Set baseUrl to the root of your project
       "paths": {
-        "@/*": ["src/*"]
+        "@/*": ["./src/*"]  // Adjust this if your source code is in a different folder
       }
     },
-    "include": ["src"]
+    "include": ["src/**/*"]  // You can include other directories if needed
   }
   

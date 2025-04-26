@@ -1,11 +1,24 @@
 "use client"
-
 import { useState } from "react"
 import { MapPin, ArrowLeft, ArrowRight } from "lucide-react"
-
-import { Button } from "../components/ui/button"
-import { Input } from "../components/ui/input"
-import { Card, CardContent } from "../components/ui/card"
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "../components/ui/select"
+import {
+  Card,
+  CardContent,
+} from "../components/ui/card"
+import {
+  Button,
+} from "../components/ui/button"
+import {
+  Input,
+} from "../components/ui/input"
+import { DatePickerDemo } from "../components/ui/date-picker" // Import the DatePickerDemo component
 
 export default function CarsPage() {
   const [filters, setFilters] = useState({
@@ -36,54 +49,16 @@ export default function CarsPage() {
       reviews: 37,
       image: "https://placehold.co/600x400",
     },
-    {
-      id: 3,
-      title: "Toyota RAV4",
-      location: "Chicago, IL",
-      type: "SUV",
-      price: 75,
-      rating: 4.7,
-      reviews: 52,
-      image: "https://placehold.co/600x400",
-    },
-    {
-      id: 4,
-      title: "Ford Transit",
-      location: "Dallas, TX",
-      type: "Van",
-      price: 85,
-      rating: 4.6,
-      reviews: 29,
-      image: "https://placehold.co/600x400",
-    },
-    {
-      id: 5,
-      title: "Honda Civic",
-      location: "Miami, FL",
-      type: "Economy",
-      price: 60,
-      rating: 4.8,
-      reviews: 48,
-      image: "https://placehold.co/600x400",
-    },
-    {
-      id: 6,
-      title: "Mercedes-Benz S-Class",
-      location: "San Francisco, CA",
-      type: "Luxury",
-      price: 150,
-      rating: 4.9,
-      reviews: 31,
-      image: "https://placehold.co/600x400",
-    },
+    // Add more cars as needed...
   ]
 
   return (
     <>
+      {/* Hero Section */}
       <section className="w-full py-12 md:py-16 lg:py-20 bg-muted">
-        <div className="container px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">Find Your Perfect Ride</h1>
+            <h1 className="text-3xl text-primary font-bold tracking-tighter sm:text-5xl">Find Your Perfect Ride</h1>
             <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
               Browse our collection of premium vehicles available to rent for your next adventure
             </p>
@@ -91,85 +66,96 @@ export default function CarsPage() {
         </div>
       </section>
 
+      {/* Main Content Section */}
       <section className="w-full py-8">
-        <div className="container px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col md:flex-row gap-6">
             {/* Filters Section */}
-            <div className="w-full md:w-1/4 space-y-6">
+            <div className="w-full md:w-1/5 space-y-6">
               <div className="border rounded-lg p-4">
                 <h3 className="font-medium text-lg mb-4">Search Cars</h3>
                 <div className="space-y-4">
+                  {/* Location Input */}
                   <div>
                     <label htmlFor="location" className="text-sm font-medium mb-1 block">
                       Pick-up Location
                     </label>
-                    <div className="flex gap-2">
-                      <Input
-                        id="location"
-                        placeholder="City, Airport, or Address"
-                        value={filters.location}
-                        onChange={(e) => setFilters({ ...filters, location: e.target.value })}
-                      />
-                    </div>
+                    <Input
+                      id="location"
+                      placeholder="City, Airport, or Address"
+                      value={filters.location}
+                      onChange={(e) => setFilters({ ...filters, location: e.target.value })}
+                    />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  {/* Date Pickers */}
+                  <div className="grid grid-cols-1 gap-4">
                     <div>
                       <label htmlFor="pickup-date" className="text-sm font-medium mb-1 block">
                         Pick-up Date
                       </label>
-                      <Input id="pickup-date" type="date" />
+                      <DatePickerDemo />
                     </div>
                     <div>
                       <label htmlFor="return-date" className="text-sm font-medium mb-1 block">
                         Return Date
                       </label>
-                      <Input id="return-date" type="date" />
+                      <DatePickerDemo />
                     </div>
                   </div>
 
+                  {/* Car Type Selector */}
                   <div>
                     <label htmlFor="car-type" className="text-sm font-medium mb-1 block">
                       Car Type
                     </label>
-                    <select
-                      id="car-type"
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    <Select
                       value={filters.carType}
-                      onChange={(e) => setFilters({ ...filters, carType: e.target.value })}
+                      onValueChange={(value) => setFilters({ ...filters, carType: value })}
                     >
-                      <option value="all">All Types</option>
-                      <option value="economy">Economy</option>
-                      <option value="compact">Compact</option>
-                      <option value="suv">SUV</option>
-                      <option value="luxury">Luxury</option>
-                      <option value="van">Van</option>
-                      <option value="electric">Electric</option>
-                    </select>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="All Types" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Types</SelectItem>
+                        <SelectItem value="economy">Economy</SelectItem>
+                        <SelectItem value="compact">Compact</SelectItem>
+                        <SelectItem value="suv">SUV</SelectItem>
+                        <SelectItem value="luxury">Luxury</SelectItem>
+                        <SelectItem value="van">Van</SelectItem>
+                        <SelectItem value="electric">Electric</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
+                  {/* Price Range Selector */}
                   <div>
                     <label htmlFor="price" className="text-sm font-medium mb-1 block">
                       Price Range
                     </label>
-                    <select
-                      id="price"
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    <Select
                       value={filters.priceRange}
-                      onChange={(e) => setFilters({ ...filters, priceRange: e.target.value })}
+                      onValueChange={(value) => setFilters({ ...filters, priceRange: value })}
                     >
-                      <option value="all">Any Price</option>
-                      <option value="0-50">$0 - $50 / day</option>
-                      <option value="50-100">$50 - $100 / day</option>
-                      <option value="100-150">$100 - $150 / day</option>
-                      <option value="150+">$150+ / day</option>
-                    </select>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Any Price" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">Any Price</SelectItem>
+                        <SelectItem value="0-50">$0 - $50 / day</SelectItem>
+                        <SelectItem value="50-100">$50 - $100 / day</SelectItem>
+                        <SelectItem value="100-150">$100 - $150 / day</SelectItem>
+                        <SelectItem value="150+">$150+ / day</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
+                  {/* Search Button */}
                   <Button className="w-full">Search Cars</Button>
                 </div>
               </div>
 
+              {/* Popular Features Section */}
               <div className="border rounded-lg p-4">
                 <h3 className="font-medium text-lg mb-4">Popular Features</h3>
                 <div className="space-y-2">
@@ -238,18 +224,19 @@ export default function CarsPage() {
                   <label htmlFor="sort" className="text-sm font-medium">
                     Sort by:
                   </label>
-                  <select
-                    id="sort"
-                    className="h-9 rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  >
-                    <option value="recommended">Recommended</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
-                    <option value="rating">Highest Rating</option>
-                  </select>
+                  <Select defaultValue="recommended">
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="Recommended" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="recommended">Recommended</SelectItem>
+                      <SelectItem value="price-low">Price: Low to High</SelectItem>
+                      <SelectItem value="price-high">Price: High to Low</SelectItem>
+                      <SelectItem value="rating">Highest Rating</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
-
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {cars.map((car) => (
                   <Card key={car.id} className="overflow-hidden">
@@ -260,7 +247,7 @@ export default function CarsPage() {
                         className="object-cover w-full h-full"
                       />
                     </div>
-                    <CardContent className="p-4">
+                    <CardContent className="!p-4 ">
                       <div className="flex justify-between items-start">
                         <div>
                           <h3 className="font-bold">{car.title}</h3>
@@ -291,22 +278,17 @@ export default function CarsPage() {
                   </Card>
                 ))}
               </div>
-
               <div className="flex justify-center mt-8">
                 <nav className="flex items-center space-x-2">
                   <Button variant="outline" size="icon" disabled>
                     <ArrowLeft className="h-4 w-4" />
                     <span className="sr-only">Previous page</span>
                   </Button>
-                  <Button variant="outline" size="sm" className="h-8 w-8">
-                    1
-                  </Button>
-                  <Button variant="outline" size="sm" className="h-8 w-8">
-                    2
-                  </Button>
-                  <Button variant="outline" size="sm" className="h-8 w-8">
-                    3
-                  </Button>
+                  {[...Array(3)].map((_, i) => (
+                    <Button key={i} variant="outline" size="sm" className="h-8 w-8">
+                      {i + 1}
+                    </Button>
+                  ))}
                   <Button variant="outline" size="icon">
                     <ArrowRight className="h-4 w-4" />
                     <span className="sr-only">Next page</span>

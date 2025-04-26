@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
 import { Card, CardContent } from "../components/ui/card"
+import { FaFacebook, FaGoogle } from "react-icons/fa"
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -33,18 +34,18 @@ export default function SignUpPage() {
   }
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 flex items-center justify-center">
+    <section className="w-full py-12 md:py-24 lg:py-24 flex items-center justify-center">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center space-y-4 text-center">
           <div className="space-y-2">
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Create an Account</h1>
+            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-primary">Create an Account</h1>
             <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
               Join RentEase today and start renting properties, cars, and clothing with ease
             </p>
           </div>
           <div className="w-full max-w-md space-y-2">
             <Card>
-              <CardContent className="p-6">
+              <CardContent className="!p-6">
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
@@ -169,9 +170,10 @@ export default function SignUpPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <Button variant="outline" className="w-full">
-                    Google
+                    <FaGoogle className="w-4 h-4 mr-4"/> Google
                   </Button>
                   <Button variant="outline" className="w-full">
+                    <FaFacebook  className="w-4 h-4 mr-4"/>
                     Facebook
                   </Button>
                 </div>

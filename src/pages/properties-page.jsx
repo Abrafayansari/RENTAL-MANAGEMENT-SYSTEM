@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, MapPin } from "lucide-react"
 import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
 import { Card, CardContent } from "../components/ui/card"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
 
 export default function PropertiesPage() {
   const [filters, setFilters] = useState({
@@ -81,9 +82,9 @@ export default function PropertiesPage() {
   return (
     <>
       <section className="w-full py-12 md:py-16 lg:py-20 bg-muted">
-        <div className="container px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">Find Your Perfect Property</h1>
+            <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl text-primary">Find Your Perfect Property</h1>
             <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
               Browse our collection of premium properties available to rent for your next stay
             </p>
@@ -92,10 +93,10 @@ export default function PropertiesPage() {
       </section>
 
       <section className="w-full py-8">
-        <div className="container px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col md:flex-row gap-6">
             {/* Filters Section */}
-            <div className="w-full md:w-1/4 space-y-6">
+            <div className="w-full md:w-1/5 space-y-6">
               <div className="border rounded-lg p-4">
                 <h3 className="font-medium text-lg mb-4">Search Properties</h3>
                 <div className="space-y-4">
@@ -117,37 +118,47 @@ export default function PropertiesPage() {
                     <label htmlFor="type" className="text-sm font-medium mb-1 block">
                       Property Type
                     </label>
-                    <select
+                    <Select
                       id="type"
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                       value={filters.type}
                       onChange={(e) => setFilters({ ...filters, type: e.target.value })}
                     >
-                      <option value="all">All Types</option>
-                      <option value="apartment">Apartment</option>
-                      <option value="house">House</option>
-                      <option value="villa">Villa</option>
-                      <option value="cabin">Cabin</option>
-                      <option value="cottage">Cottage</option>
-                    </select>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="All Types" />
+                      </SelectTrigger>
+                    <SelectContent>
+                    <SelectItem value="all">All Types</SelectItem>
+                      <SelectItem value="apartment">Apartment</SelectItem>
+                      <SelectItem value="house">House</SelectItem>
+                      <SelectItem value="villa">Villa</SelectItem>
+                      <SelectItem value="cabin">Cabin</SelectItem>
+                      <SelectItem value="cottage">Cottage</SelectItem>
+                    </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
                     <label htmlFor="price" className="text-sm font-medium mb-1 block">
                       Price Range
                     </label>
-                    <select
+                    <Select
                       id="price"
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                       value={filters.priceRange}
                       onChange={(e) => setFilters({ ...filters, priceRange: e.target.value })}
                     >
-                      <option value="all">Any Price</option>
-                      <option value="0-100">$0 - $100 / night</option>
-                      <option value="100-200">$100 - $200 / night</option>
-                      <option value="200-300">$200 - $300 / night</option>
-                      <option value="300+">$300+ / night</option>
-                    </select>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Any Price" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">Any Price</SelectItem>
+                        <SelectItem value="0-100">$0 - $100 / night</SelectItem>
+                        <SelectItem value="100-200">$100 - $200 / night</SelectItem>
+                        <SelectItem value="200-300">$200 - $300 / night</SelectItem>
+                        <SelectItem value="300+">$300+ / night</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <Button className="w-full">Apply Filters</Button>
@@ -222,15 +233,17 @@ export default function PropertiesPage() {
                   <label htmlFor="sort" className="text-sm font-medium">
                     Sort by:
                   </label>
-                  <select
-                    id="sort"
-                    className="h-9 rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  >
-                    <option value="recommended">Recommended</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
-                    <option value="rating">Highest Rating</option>
-                  </select>
+                  <Select defaultValue="recommended">
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="Recommended" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="recommended">Recommended</SelectItem>
+                      <SelectItem value="price-low">Price: Low to High</SelectItem>
+                      <SelectItem value="price-high">Price: High to Low</SelectItem>
+                      <SelectItem value="rating">Highest Rating</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
 
@@ -244,7 +257,7 @@ export default function PropertiesPage() {
                         className="object-cover w-full h-full"
                       />
                     </div>
-                    <CardContent className="p-4">
+                    <CardContent className="!p-4">
                       <div className="flex justify-between items-start">
                         <div>
                           <h3 className="font-bold">{property.title}</h3>

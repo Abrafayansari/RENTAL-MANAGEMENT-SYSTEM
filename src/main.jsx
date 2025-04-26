@@ -11,6 +11,7 @@ import ClothingPage from "./pages/clothing-page"
 import HowItWorksPage from "./pages/how-it-works-page"
 import SignInPage from "./pages/sign-in-page"
 import SignUpPage from "./pages/sign-up-page"
+import ForgetPassword from "./pages/forget-password-page"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
@@ -25,9 +26,10 @@ root.render(
           <Route path="how-it-works" element={<HowItWorksPage />} />
           <Route path="sign-in" element={<SignInPage />} />
           <Route path="sign-up" element={<SignUpPage />} />
+          <Route path="forget-password" element={<ForgetPassword />} />
+
         </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
 )
-  

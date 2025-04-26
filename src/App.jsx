@@ -8,6 +8,7 @@ import ClothingPage from "./pages/clothing-page"
 import HowItWorksPage from "./pages/how-it-works-page"
 import SignInPage from "./pages/sign-in-page"
 import SignUpPage from "./pages/sign-up-page"
+import ForgetPassword from "./pages/forget-password-page"
 
 function App() {
   return (
@@ -19,8 +20,10 @@ function App() {
           <Route path="cars" element={<CarsPage />} />
           <Route path="clothing" element={<ClothingPage />} />
           <Route path="how-it-works" element={<HowItWorksPage />} />
+          <Route path="forget-password" element={<div>Forget Pa</div>} />
           <Route path="sign-in" element={<SignInPage />} />
           <Route path="sign-up" element={<SignUpPage />} />
+
         </Route>
       </Routes>
     </Router>
