@@ -1,7 +1,7 @@
 package RMS.Classes;
 
 
-public class Listing extends Item {
+public class Listing {
     private long listingId;
     private Item item;
     private User owner;

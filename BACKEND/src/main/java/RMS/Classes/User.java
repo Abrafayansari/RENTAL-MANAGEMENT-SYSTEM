@@ -1,10 +1,17 @@
 package RMS.Classes;
 
 
+
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.ArrayList;
 
+@Document
 public class User {
-    public static long userCount=0;
+    public static long user_Count=0;
+    @Id
     private Long id;
     private String name;
     private String email;
@@ -22,16 +29,26 @@ public class User {
         this.address = address;
         this.listings = new ArrayList<>();
         this.rentedItems = new ArrayList<>();
-        userCount++;
-        this.id =userCount;
+        user_Count++;
+        this.id =user_Count;
+
+
     }
 
-    public static long getUserCount() {
-        return userCount;
+    public static long getUser_Count() {
+        return user_Count;
+    }
+
+    public static void setUser_Count(long user_Count) {
+        User.user_Count = user_Count;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -82,11 +99,14 @@ public class User {
         this.address = address;
     }
 
-    public ArrayList<Listings> getListings() {
+    public ArrayList<Listing> getListings() {
         return listings;
     }
 
-    public void setListings(ArrayList<Listings> listings) {
+    public void setListings(ArrayList<Listing> listings) {
         this.listings = listings;
     }
+
+
 }
+
