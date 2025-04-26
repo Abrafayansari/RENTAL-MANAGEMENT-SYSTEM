@@ -1,6 +1,5 @@
 package RMS.Classes;
 
-
 public class Item {
     protected long itemId;
     protected String itemName;
