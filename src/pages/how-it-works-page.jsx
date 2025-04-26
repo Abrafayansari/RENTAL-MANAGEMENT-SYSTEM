@@ -277,9 +277,9 @@ export default function HowItWorksPage() {
     <>
       {/* Hero Section */}
       <section className="w-full py-16 md:py-20 lg:py-24 bg-muted">
-        <div className="container px-4 md:px-6">
-          <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-6 text-center">
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl text-gray-900">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="mx-auto flex  flex-col items-center space-y-6 text-center">
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl text-primary">
               How RentEase Works
             </h1>
             <p className="max-w-[85%] text-muted-foreground sm:text-lg leading-relaxed">
@@ -290,8 +290,8 @@ export default function HowItWorksPage() {
       </section>
 
       {/* 3-Step Process */}
-      <section className="w-full py-20 bg-white">
-        <div className="container px-4 md:px-6">
+      <section className="w-full py-20 mx-auto bg-white">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="mx-auto max-w-5xl grid gap-16">
             <div className="grid md:grid-cols-3 gap-10">
               {[
@@ -325,7 +325,7 @@ export default function HowItWorksPage() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 bg-orange-600 text-white text-center">
+      <section className="py-20 bg-primary  text-white text-center">
         <div className="container mx-auto space-y-8">
           <h2 className="text-4xl font-bold">Why Choose Us?</h2>
           <p className="max-w-2xl mx-auto text-lg leading-relaxed">
@@ -333,7 +333,7 @@ export default function HowItWorksPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             {["Huge Variety", "Trusted Providers", "Secure Payments", "24/7 Support"].map((feature, idx) => (
-              <div key={idx} className="bg-white text-orange-600 py-3 px-5 rounded-full font-medium text-sm shadow-md hover:shadow-lg transition">
+              <div key={idx} className="bg-white text-primary py-3 px-5 rounded-full font-medium text-sm shadow-md hover:shadow-lg transition">
                 {feature}
               </div>
             ))}
@@ -343,7 +343,7 @@ export default function HowItWorksPage() {
 
       {/* FAQ Section */}
       <section className="w-full py-20 bg-muted">
-        <div className="container px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="mx-auto max-w-5xl space-y-10">
             <div className="text-center space-y-3">
               <h2 className="text-3xl font-bold sm:text-4xl">Frequently Asked Questions</h2>
@@ -358,8 +358,8 @@ export default function HowItWorksPage() {
                 ["How do returns work?", "For properties/cars, follow check-out steps. For clothing, use our prepaid label."],
                 ["Is there a security deposit?", "Yes, most rentals include a refundable deposit upon return in original condition."],
               ].map(([question, answer], idx) => (
-                <Card key={idx} className="hover:shadow-md transition">
-                  <CardContent className="p-6">
+                <Card key={idx} className="hover:shadow-md  transition">
+                  <CardContent className="!p-6 hover:ring-2 ring-primary ring-offset-4 transition rounded-xl"> 
                     <h3 className="text-lg font-bold mb-2">{question}</h3>
                     <p className="text-muted-foreground text-sm">{answer}</p>
                   </CardContent>
@@ -372,7 +372,7 @@ export default function HowItWorksPage() {
 
       {/* Detailed Rental Process */}
       <section className="w-full py-12 md:py-24 lg:py-32">
-  <div className="container px-4 md:px-6">
+  <div className="container mx-auto px-4 md:px-6">
     <div className="mx-auto grid max-w-5xl gap-10">
       <div className="space-y-4 text-center">
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Our Rental Process</h2>
@@ -390,8 +390,8 @@ export default function HowItWorksPage() {
           { icon: <FaUndoAlt />, title: "Return", description: "Return your rental at the end of your rental period. For properties and cars, follow the check-out instructions. For clothing, use the prepaid return shipping label." },
           { icon: <FaStar />, title: "Leave a Review", description: "Share your experience with the community by leaving a review. Your feedback helps other renters make informed decisions and helps us improve our service." }
         ].map((step, index) => (
-          <div key={index} className="flex flex-col md:flex-row gap-6 items-start">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground text-xl">
+          <div key={index} className="flex flex-col group md:flex-row gap-6 items-start">
+            <div className="flex shrink-0 h-12 w-12 group-hover:ring-4 ring-primary ring-offset-2 items-center justify-center rounded-full bg-primary text-primary-foreground text-xl">
               {step.icon}
             </div>
             <div className="space-y-2">
@@ -407,7 +407,7 @@ export default function HowItWorksPage() {
 
       {/* CTA Section */}
       <section className="w-full py-20 bg-primary text-primary-foreground">
-        <div className="container px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-6 text-center">
             <h2 className="text-4xl font-bold tracking-tight">Ready to Start Renting?</h2>
             <p className="max-w-xl text-lg">
@@ -418,7 +418,7 @@ export default function HowItWorksPage() {
               <Button
                 variant="outline"
                 size="lg"
-                className="bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground/10"
+                // className="bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground/10"
               >
                 Sign Up Now
               </Button>
