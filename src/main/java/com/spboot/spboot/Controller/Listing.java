@@ -1,12 +1,12 @@
 package com.spboot.spboot.Controller;
 
-public class Listings extends Item{
+public class Listing extends Item {
     private long listingId;
     private Item item;
     private User owner;
     private String description;
 
-    public Main(long listingId, Item item, User owner, String description) {
+    public Listing(long listingId, Item item, User owner, String description) {
         this.listingId = listingId;
         this.item = item;
         this.owner = owner;

@@ -4,9 +4,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
-
 public class User {
-    public static long user_Count=0;
+    public static long userCount=0;
     private Long id;
     private String name;
     private String email;
@@ -14,7 +13,7 @@ public class User {
     private String password;
     private String address;
     private ArrayList<Item> rentedItems;
-    private ArrayList<Listings> listings;
+    private ArrayList<Listing> listings;
 
     public User(String name, String email, String phoneNumber, String password, String address) {
         this.name = name;
@@ -24,26 +23,16 @@ public class User {
         this.address = address;
         this.listings = new ArrayList<>();
         this.rentedItems = new ArrayList<>();
-        user_Count++;
-        this.id =user_Count;
-
-
+        userCount++;
+        this.id =userCount;
     }
 
-    public static long getUser_Count() {
-        return user_Count;
-    }
-
-    public static void setUser_Count(long user_Count) {
-        User.user_Count = user_Count;
+    public static long getUserCount() {
+        return userCount;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -101,7 +90,5 @@ public class User {
     public void setListings(ArrayList<Listings> listings) {
         this.listings = listings;
     }
-
-
 }
 

@@ -7,12 +7,12 @@ public class Item {
     protected double pricePerDay;
     protected boolean isAvailable;
 
-    public Main(long itemId, String itemName, String category, double pricePerDay, boolean isAvailable) {
+    public Item(long itemId, String itemName, String category, double pricePerDay) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.category = category;
         this.pricePerDay = pricePerDay;
-        this.isAvailable = isAvailable;
+        this.isAvailable = true;
     }
 
     public long getItemId() {

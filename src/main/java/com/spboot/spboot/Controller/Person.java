@@ -4,6 +4,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Person {
+    private String name;
+    private String phone;
+    
     public String getPhone() {
         return phone;
     }
@@ -19,7 +22,4 @@ public class Person {
     public void setName(String name) {
         this.name = name;
     }
-
-    private String name;
-    private String phone;
 }
