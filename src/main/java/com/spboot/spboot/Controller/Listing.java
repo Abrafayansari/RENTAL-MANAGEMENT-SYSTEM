@@ -2,7 +2,6 @@ package com.spboot.spboot.Controller;
 
 public class Listing extends Item {
     private long listingId;
-    private Item item;
     private User owner;
     private String description;
 
