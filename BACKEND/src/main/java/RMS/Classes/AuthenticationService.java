@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service // <--- don't forget this annotation
 public class AuthenticationService {
-    private List<User> users = new ArrayList<>(); // temporary in-memory storage
+    private ArrayList<User> users = new ArrayList<>(); // temporary in-memory storage
 
 
 

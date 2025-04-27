@@ -10,8 +10,8 @@ public class Car extends Item {
     private String fuelType;
     private String transmissionType;
 
-    public Car(long itemId, String itemName, double pricePerDay, String brand, String model, int year, String fuelType, String transmissionType) {
-        super(itemId, itemName, "Car", pricePerDay);
+    public Car(long itemId, String itemName, double pricePerDay, String picURL, String brand, String model, int year, String fuelType, String transmissionType) {
+        super(itemId, itemName, "Car", pricePerDay, picURL);
         this.brand = brand;
         this.model = model;
         this.year = year;

@@ -8,8 +8,8 @@ public class Clothing extends Item {
     private String material;
     private String gender; // Men, Women
 
-    public Clothing(long itemId, String itemName, double pricePerDay, String size, String material, String gender) {
-        super(itemId, itemName, "Clothing", pricePerDay);
+    public Clothing(long itemId, String itemName, double pricePerDay, String picURL, String size, String material, String gender) {
+        super(itemId, itemName, "Clothing", pricePerDay, picURL);
         this.size = size;
         this.material = material;
         this.gender = gender;

@@ -9,8 +9,8 @@ public class Property extends Item {
     private double areaInSquareFeet;
     private boolean furnished;
 
-    public Property(long itemId, String itemName, double pricePerDay, String address, int numberOfRooms, double areaInSquareFeet, boolean furnished) {
-        super(itemId, itemName, "Property", pricePerDay);
+    public Property(long itemId, String itemName, double pricePerDay, String picURL, String address, int numberOfRooms, double areaInSquareFeet, boolean furnished) {
+        super(itemId, itemName, "Property", pricePerDay, picURL);
         this.address = address;
         this.numberOfRooms = numberOfRooms;
         this.areaInSquareFeet = areaInSquareFeet;

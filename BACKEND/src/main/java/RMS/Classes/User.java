@@ -1,8 +1,5 @@
 package RMS.Classes;
 
-
-
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -31,8 +28,6 @@ public class User {
         this.rentedItems = new ArrayList<>();
         user_Count++;
         this.id =user_Count;
-
-
     }
 
     public static long getUser_Count() {
@@ -106,7 +101,5 @@ public class User {
     public void setListings(ArrayList<Listing> listings) {
         this.listings = listings;
     }
-
-
 }
 
