@@ -1,5 +1,5 @@
 "use client"
-
+import axios from "axios"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Button } from "../components/ui/button"
@@ -9,28 +9,28 @@ import { FaFacebook, FaGoogle } from "react-icons/fa"
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
+    phoneNumber: "",
     password: "",
-    confirmPassword: "",
+    address: "",
   })
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Here you would typically handle registration
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords don't match!")
-      return
+  
+    try {
+      const response = await axios.post("http://localhost:1234/signup", formData)
+      alert(response.data)  // Show the message from backend: "Signup successful!" or "User already exists!"
+      console.log(response.data)
+    } catch (error) {
+      console.error("Signup error:", error)
+      alert("Signup failed. Please try again.")
     }
-    console.log("Sign up attempt with:", formData)
-    // For demo purposes, we'll just log the attempt
-    alert("Sign up functionality would be implemented here")
   }
 
   return (
@@ -49,45 +49,31 @@ export default function SignUpPage() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label
-                        htmlFor="firstName"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        First Name
-                      </label>
+                      <label htmlFor="name" className="text-sm font-medium leading-none">Name</label>
                       <Input
-                        id="firstName"
-                        name="firstName"
-                        placeholder="John"
-                        value={formData.firstName}
+                        id="name"
+                        name="name"
+                        placeholder="John Doe"
+                        value={formData.name}
                         onChange={handleChange}
                         required
                       />
                     </div>
                     <div className="space-y-2">
-                      <label
-                        htmlFor="lastName"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        Last Name
-                      </label>
+                      <label htmlFor="phoneNumber" className="text-sm font-medium leading-none">Phone Number</label>
                       <Input
-                        id="lastName"
-                        name="lastName"
-                        placeholder="Doe"
-                        value={formData.lastName}
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        placeholder="+1234567890"
+                        value={formData.phoneNumber}
                         onChange={handleChange}
                         required
                       />
                     </div>
                   </div>
+
                   <div className="space-y-2">
-                    <label
-                      htmlFor="email"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Email
-                    </label>
+                    <label htmlFor="email" className="text-sm font-medium leading-none">Email</label>
                     <Input
                       id="email"
                       name="email"
@@ -98,13 +84,21 @@ export default function SignUpPage() {
                       required
                     />
                   </div>
+
                   <div className="space-y-2">
-                    <label
-                      htmlFor="password"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Password
-                    </label>
+                    <label htmlFor="address" className="text-sm font-medium leading-none">Address</label>
+                    <Input
+                      id="address"
+                      name="address"
+                      placeholder="123 Main Street, City"
+                      value={formData.address}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="password" className="text-sm font-medium leading-none">Password</label>
                     <Input
                       id="password"
                       name="password"
@@ -115,23 +109,7 @@ export default function SignUpPage() {
                       required
                     />
                   </div>
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="confirmPassword"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Confirm Password
-                    </label>
-                    <Input
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      type="password"
-                      placeholder="••••••••"
-                      value={formData.confirmPassword}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
+
                   <div className="flex items-center space-x-2">
                     <input
                       type="checkbox"
@@ -150,16 +128,17 @@ export default function SignUpPage() {
                       </Link>
                     </label>
                   </div>
-                  <Button type="submit" className="w-full">
-                    Sign Up
-                  </Button>
+
+                  <Button type="submit" className="w-full">Sign Up</Button>
                 </form>
+
                 <div className="mt-4 text-center text-sm">
                   Already have an account?{" "}
                   <Link to="/sign-in" className="text-primary underline-offset-4 hover:underline">
                     Sign in
                   </Link>
                 </div>
+
                 <div className="relative my-4">
                   <div className="absolute inset-0 flex items-center">
                     <div className="w-full border-t"></div>
@@ -168,13 +147,13 @@ export default function SignUpPage() {
                     <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
                   </div>
                 </div>
+
                 <div className="grid grid-cols-2 gap-4">
                   <Button variant="outline" className="w-full">
-                    <FaGoogle className="w-4 h-4 mr-4"/> Google
+                    <FaGoogle className="w-4 h-4 mr-4" /> Google
                   </Button>
                   <Button variant="outline" className="w-full">
-                    <FaFacebook  className="w-4 h-4 mr-4"/>
-                    Facebook
+                    <FaFacebook className="w-4 h-4 mr-4" /> Facebook
                   </Button>
                 </div>
               </CardContent>

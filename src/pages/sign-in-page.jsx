@@ -1,13 +1,16 @@
 "use client"
-
-import { useState } from "react"
+import axios from "axios"
+import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
 import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
 import { Card, CardContent } from "../components/ui/card"
 import { FaFacebook, FaGoogle } from "react-icons/fa"
+import { UserContext } from "../hooks/Context"
 
 export default function SignInPage() {
+  const {setUser}=useContext(UserContext)
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -18,12 +21,26 @@ export default function SignInPage() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Here you would typically handle authentication
-    console.log("Sign in attempt with:", formData)
-    // For demo purposes, we'll just log the attempt
-    alert("Sign in functionality would be implemented here")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // First Login Attempt
+      const loginResponse = await axios.post("http://localhost:1234/login", formData);
+      console.log("Login Successful", loginResponse.data);
+      alert(loginResponse.data);
+  
+      // Then Fetch User Info by Email
+      const userResponse = await axios.get(`http://localhost:1234/finduserbyemail/${formData.email}`);
+      console.log("Fetched User Data", userResponse.data);
+      setUser(userResponse.data);
+  
+      // Optionally you can navigate to homepage
+      // navigate("/dashboard");
+      
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Login failed or User not found! Please check your email and password.");
+    }
   }
 
   return (

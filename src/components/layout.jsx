@@ -1,8 +1,10 @@
+import  {UserContext}  from "../hooks/Context"
+import { useContext } from "react"
 import { Link, Outlet, useLocation } from "react-router-dom"
 
 export default function Layout() {
   const location = useLocation()
-
+const User=useContext(UserContext);
   return (
     <div className="flex min-h-screen flex-col">
       {/* Header */}
@@ -10,7 +12,7 @@ export default function Layout() {
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 font-bold text-2xl text-primary">
-            RentEase
+            RentEase {User?.name}
           </Link>
 
           {/* Navigation */}
