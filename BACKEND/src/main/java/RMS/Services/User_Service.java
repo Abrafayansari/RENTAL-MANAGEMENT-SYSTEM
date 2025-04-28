@@ -1,12 +1,15 @@
 package RMS.Services;
 
+import RMS.Classes.Item;
 import RMS.Classes.User;
 import RMS.Repository.User_repo;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +22,8 @@ public class User_Service {
     public  void saveEntry(User user){
         user_repo.save(user);
     }
+
+
     public User findUserByEmail(String email) {
         List <User> users=user_repo.findAll();
         for (User user : users) {
@@ -77,4 +82,11 @@ public class User_Service {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.encode(rawPassword);
     }
+
+    public List<Item> uploadRentedItem(User user){
+        User u = user_repo.findById(user.getId()).orElse(null);
+        return u.getRentedItems();
+    }
+
+
 }
