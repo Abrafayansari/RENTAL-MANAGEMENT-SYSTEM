@@ -1,33 +1,19 @@
 package RMS.Classes;
 
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class Listing {
-    private long listingId;
-    private Item item;
+@Document(collection = "items")
+@TypeAlias("Listing")
+public class Listing extends Item {
     private User owner;
     private String description;
 
-    public Listing(long listingId, Item item, User owner, String description) {
-        this.listingId = listingId;
-        this.item = item;
+
+    public Listing(long itemId, String itemName, String category, double pricePerDay, String picURL, User owner, String description) {
+        super(itemId,itemName,category,pricePerDay,picURL);
         this.owner = owner;
         this.description = description;
-    }
-
-    public long getListingId() {
-        return listingId;
-    }
-
-    public void setListingId(long listingId) {
-        this.listingId = listingId;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
     }
 
     public User getOwner() {

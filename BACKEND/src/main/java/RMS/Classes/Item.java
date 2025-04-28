@@ -1,11 +1,21 @@
 package RMS.Classes;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Collection;
+
+@Document(collection = "items")
+@TypeAlias("Item")
+
 public class Item {
+    @Id
     protected long itemId;
     protected String itemName;
     protected String category;
     protected double pricePerDay;
-    protected boolean isAvailable;
+    protected boolean isAvailable=true;
     protected String picURL;
 
     public Item(long itemId, String itemName, String category, double pricePerDay, String picURL) {
@@ -13,7 +23,6 @@ public class Item {
         this.itemName = itemName;
         this.category = category;
         this.pricePerDay = pricePerDay;
-        this.isAvailable = true;
         this.picURL = picURL;
     }
 

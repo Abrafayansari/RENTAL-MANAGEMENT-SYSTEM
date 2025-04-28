@@ -1,8 +1,10 @@
 package RMS.Classes;
 
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collection = "items")
+@TypeAlias("Property")
 public class Property extends Item {
     private String address;
     private int numberOfRooms;

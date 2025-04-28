@@ -1,10 +1,7 @@
 package RMS.Controller;
 
 import RMS.Classes.*;
-import RMS.Services.Car_Service;
-import RMS.Services.Clothing_Service;
-import RMS.Services.Property_Service;
-import RMS.Services.User_Service;
+import RMS.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,10 +46,19 @@ public class Controll {
 return user_service.login(login.getEmail(),login.getPassword());
         }
 
-        @PostMapping("/findUserListedItem")
-            public List<Item> findItems(@RequestBody User user){
-            return user.getRentedItems();
-        }
+//        @PostMapping("/findUserListedItem")
+//            public List<Item> findItems(@RequestBody User user){
+//            return user.getRentedItems();
+//        }
+    @PostMapping("/uploadrenteditems/{userid}/{itemid}")
+    public Optional<User> uploadrentaeditems(@PathVariable Long userid, @PathVariable Long itemid ){
+       boolean clearance= user_service.uploadRentedItem(userid,itemid);
+       if(clearance){
+           return user_service.finduserbyid(userid);
+       }
+
+        return null;
+    }
 
 
 
@@ -68,6 +74,7 @@ return user_service.login(login.getEmail(),login.getPassword());
 
     @GetMapping("/findAll-car")
     public List<Car> findCar(){
+
         return car_service.findCar();
     }
 
@@ -91,5 +98,20 @@ return user_service.login(login.getEmail(),login.getPassword());
     public Property upload_property(@RequestBody Property p){
         property_service.uploadProperty(p);
         return p;
+    }
+
+
+
+    /// ////////////////////Item////////////////
+    @Autowired
+    Item_Service item_service;
+    @GetMapping("/getallitem")
+    public List<Item>getallitem(){
+        return  item_service.getitem();
+    }
+
+    @GetMapping("/getallcar")
+    public List<Car>getallcar(){
+        return item_service.getcar();
     }
 }

@@ -18,8 +18,7 @@ import {
 import {
   Input,
 } from "../components/ui/input"
-import { DatePickerDemo } from "../components/ui/date-picker" // Import the DatePickerDemo component
-
+import { DatePickerDemo } from "../components/ui/date-picker" 
 export default function CarsPage() {
   const [filters, setFilters] = useState({
     location: "",
@@ -27,7 +26,7 @@ export default function CarsPage() {
     priceRange: "all",
   })
 
-  // Mock data for cars
+
   const cars = [
     {
       id: 1,
@@ -37,7 +36,7 @@ export default function CarsPage() {
       price: 95,
       rating: 4.9,
       reviews: 42,
-      image: "https://placehold.co/600x400",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXUa_LGCqP-G_QvODPwD8PTJxaD5uIqnSeeg&s",
     },
     {
       id: 2,
@@ -47,14 +46,13 @@ export default function CarsPage() {
       price: 120,
       rating: 4.8,
       reviews: 37,
-      image: "https://placehold.co/600x400",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXUa_LGCqP-G_QvODPwD8PTJxaD5uIqnSeeg&s",
     },
-    // Add more cars as needed...
-  ]
+  ]   
 
   return (
     <>
-      {/* Hero Section */}
+      
       <section className="w-full py-12 md:py-16 lg:py-20 bg-muted">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
@@ -66,16 +64,13 @@ export default function CarsPage() {
         </div>
       </section>
 
-      {/* Main Content Section */}
       <section className="w-full py-8">
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col md:flex-row gap-6">
-            {/* Filters Section */}
             <div className="w-full md:w-1/5 space-y-6">
               <div className="border rounded-lg p-4">
                 <h3 className="font-medium text-lg mb-4">Search Cars</h3>
                 <div className="space-y-4">
-                  {/* Location Input */}
                   <div>
                     <label htmlFor="location" className="text-sm font-medium mb-1 block">
                       Pick-up Location
@@ -88,7 +83,6 @@ export default function CarsPage() {
                     />
                   </div>
 
-                  {/* Date Pickers */}
                   <div className="grid grid-cols-1 gap-4">
                     <div>
                       <label htmlFor="pickup-date" className="text-sm font-medium mb-1 block">
@@ -104,7 +98,6 @@ export default function CarsPage() {
                     </div>
                   </div>
 
-                  {/* Car Type Selector */}
                   <div>
                     <label htmlFor="car-type" className="text-sm font-medium mb-1 block">
                       Car Type
@@ -128,7 +121,6 @@ export default function CarsPage() {
                     </Select>
                   </div>
 
-                  {/* Price Range Selector */}
                   <div>
                     <label htmlFor="price" className="text-sm font-medium mb-1 block">
                       Price Range
@@ -150,12 +142,11 @@ export default function CarsPage() {
                     </Select>
                   </div>
 
-                  {/* Search Button */}
+              
                   <Button className="w-full">Search Cars</Button>
                 </div>
               </div>
 
-              {/* Popular Features Section */}
               <div className="border rounded-lg p-4">
                 <h3 className="font-medium text-lg mb-4">Popular Features</h3>
                 <div className="space-y-2">
@@ -213,7 +204,7 @@ export default function CarsPage() {
               </div>
             </div>
 
-            {/* Car Listings */}
+            
             <div className="w-full md:w-3/4">
               <div className="flex justify-between items-center mb-6">
                 <div>

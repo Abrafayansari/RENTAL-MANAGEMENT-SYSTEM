@@ -25,7 +25,7 @@ export default function PropertiesPage() {
       price: 150,
       rating: 4.8,
       reviews: 24,
-      image: "https://placehold.co/600x400",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiB3JaM2F3_8PNSqBFvxZwcCCYJhEn4hx2VA&s",
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ export default function PropertiesPage() {
       price: 350,
       rating: 4.9,
       reviews: 37,
-      image: "https://placehold.co/600x400",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiB3JaM2F3_8PNSqBFvxZwcCCYJhEn4hx2VA&s",
     },
     {
       id: 3,
@@ -45,7 +45,7 @@ export default function PropertiesPage() {
       price: 180,
       rating: 4.7,
       reviews: 19,
-      image: "https://placehold.co/600x400",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiB3JaM2F3_8PNSqBFvxZwcCCYJhEn4hx2VA&s",
     },
     {
       id: 4,
@@ -55,7 +55,7 @@ export default function PropertiesPage() {
       price: 300,
       rating: 4.9,
       reviews: 42,
-      image: "https://placehold.co/600x400",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiB3JaM2F3_8PNSqBFvxZwcCCYJhEn4hx2VA&s",
     },
     {
       id: 5,
@@ -65,7 +65,7 @@ export default function PropertiesPage() {
       price: 220,
       rating: 4.6,
       reviews: 31,
-      image: "https://placehold.co/600x400",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiB3JaM2F3_8PNSqBFvxZwcCCYJhEn4hx2VA&s",
     },
     {
       id: 6,
@@ -75,7 +75,7 @@ export default function PropertiesPage() {
       price: 190,
       rating: 4.8,
       reviews: 27,
-      image: "https://placehold.co/600x400",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiB3JaM2F3_8PNSqBFvxZwcCCYJhEn4hx2VA&s",
     },
   ]
 

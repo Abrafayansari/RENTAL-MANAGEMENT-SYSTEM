@@ -18,7 +18,7 @@ import {
 import {
   Input,
 } from "../components/ui/input"
-import { DatePickerDemo } from "../components/ui/date-picker" // Import the DatePickerDemo component
+import { DatePickerDemo } from "../components/ui/date-picker" 
 
 export default function ClothingPage() {
   const [filters, setFilters] = useState({
@@ -28,10 +28,9 @@ export default function ClothingPage() {
     priceRange: "all",
   })
 
-  const [startDate, setStartDate] = useState(undefined) // State for start date
-  const [endDate, setEndDate] = useState(undefined) // State for end date
+  const [startDate, setStartDate] = useState(undefined) 
+  const [endDate, setEndDate] = useState(undefined)
 
-  // Mock data for clothing
   const clothing = [
     {
       id: 1,
@@ -42,7 +41,7 @@ export default function ClothingPage() {
       price: 120,
       rating: 4.9,
       reviews: 32,
-      image: "https://placehold.co/600x400",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlQwmN3Y_njvVV6m9_SZW0i5UhSpW5rhjSlQ&s",
     },
     {
       id: 2,
@@ -53,7 +52,7 @@ export default function ClothingPage() {
       price: 95,
       rating: 4.8,
       reviews: 29,
-      image: "https://placehold.co/600x400",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlQwmN3Y_njvVV6m9_SZW0i5UhSpW5rhjSlQ&s",
     },
     // Add more items as needed...
   ]

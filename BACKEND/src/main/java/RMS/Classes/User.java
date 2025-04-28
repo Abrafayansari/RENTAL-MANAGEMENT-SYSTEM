@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Document
 public class User {
@@ -15,8 +16,8 @@ public class User {
     private String phoneNumber;
     private String password;
     private String address;
-    private ArrayList<Item> rentedItems;
-    private ArrayList<Listing> listings;
+    private List <Item> rentedItems;
+    private List<Listing> listings;
 
     public User(String name, String email, String phoneNumber, String password, String address) {
         this.name = name;
@@ -25,7 +26,6 @@ public class User {
         this.password = password;
         this.address = address;
         this.listings = new ArrayList<>();
-        this.rentedItems = new ArrayList<>();
         user_Count++;
         this.id =user_Count;
     }
@@ -78,12 +78,12 @@ public class User {
         this.password = password;
     }
 
-    public ArrayList<Item> getRentedItems() {
+    public List<Item> getRentedItems() {
         return rentedItems;
     }
 
-    public void setRentedItems(ArrayList<Item> rentedItems) {
-        this.rentedItems = rentedItems;
+    public void setRentedItems(Item rentedItems) {
+        this.rentedItems.add(rentedItems);
     }
 
     public String getAddress() {
@@ -94,7 +94,7 @@ public class User {
         this.address = address;
     }
 
-    public ArrayList<Listing> getListings() {
+    public List<Listing> getListings() {
         return listings;
     }
 

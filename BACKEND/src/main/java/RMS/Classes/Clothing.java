@@ -1,8 +1,12 @@
 package RMS.Classes;
 
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+import java.util.Collection;
+
+@Document(collection="items")
+@TypeAlias("Clothing")
 public class Clothing extends Item {
     private String size;
     private String material;

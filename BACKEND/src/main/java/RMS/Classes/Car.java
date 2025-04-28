@@ -1,8 +1,10 @@
 package RMS.Classes;
 
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collection = "items")
+@TypeAlias("Car")
 public class Car extends Item {
     private String brand;
     private String model;

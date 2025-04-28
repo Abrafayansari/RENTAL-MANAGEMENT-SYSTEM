@@ -48,9 +48,9 @@ export default function HomePage() {
             <p className="text-lg text-gray-700 max-w-xl">
               Find the perfect rental for your needs. From properties to cars to clothing, we've got you covered.
             </p>
-            <Tabs defaultValue="properties" className="w-full max-w-md">
-              <TabsList className="grid grid-cols-3">
-                <TabsTrigger value="properties"><Building className="mr-1" /> Properties</TabsTrigger>
+            <Tabs defaultValue="properties" className="w-full  max-w-md">
+              <TabsList className="grid grid-cols-3 ">
+                <TabsTrigger value="properties"><Building className="mr-1 " /> Properties</TabsTrigger>
                 <TabsTrigger value="cars"><Car className="mr-1" /> Cars</TabsTrigger>
                 <TabsTrigger value="clothing"><Shirt className="mr-1" /> Clothing</TabsTrigger>
               </TabsList>
@@ -152,7 +152,7 @@ export default function HomePage() {
       </section>
 
 
-      <section className="min-h-screen bg-gray-50 flex items-center justify-center px-6">
+      {/* <section className="min-h-screen bg-gray-50 flex items-center justify-center px-6">
         <div className="text-center space-y-10">
           <h2 className="text-4xl font-bold text-gray-800">Trusted by Karachi’s Top Renters</h2>
           <p className="text-gray-600 max-w-xl mx-auto">
@@ -169,7 +169,7 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="py-20 bg-gradient-to-r from-orange-100 to-orange-200 text-center">
         <div className="container mx-auto space-y-6">

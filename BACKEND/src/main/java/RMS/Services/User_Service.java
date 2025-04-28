@@ -2,14 +2,12 @@ package RMS.Services;
 
 import RMS.Classes.Item;
 import RMS.Classes.User;
+import RMS.Repository.Item_repo;
 import RMS.Repository.User_repo;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,10 +81,32 @@ public class User_Service {
         return encoder.encode(rawPassword);
     }
 
-    public List<Item> uploadRentedItem(User user){
-        User u = user_repo.findById(user.getId()).orElse(null);
-        return u.getRentedItems();
+//    public List<Item> findRentedItem(User user){
+//        User u = user_repo.findById(user.getId()).orElse(null);
+//        return u.getRentedItems();
+//    }
+@Autowired
+private Item_repo item_repo;
+
+    public boolean uploadRentedItem(Long userId, Long itemId) {
+        Optional<User> optuser = user_repo.findById(userId);
+        Optional<Item> optitem = item_repo.findById(itemId);
+
+        if (optuser.isPresent() && optitem.isPresent()) {
+            User user = optuser.get();
+            Item item = optitem.get();
+
+            if (item.isAvailable()) {
+                item.setAvailable(false);
+                user.setRentedItems(item);
+                user_repo.save(user);
+                item_repo.save(item);
+                return true;
+            }
+        }
+        return false;
     }
+
 
 
 }
