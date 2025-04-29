@@ -15,7 +15,7 @@ public class Item {
     protected String itemName;
     protected String category;
     protected double pricePerDay;
-    protected boolean isAvailable=true;
+    protected boolean isAvailable;
     protected String picURL;
 
     public Item(long itemId, String itemName, String category, double pricePerDay, String picURL) {
@@ -23,6 +23,7 @@ public class Item {
         this.itemName = itemName;
         this.category = category;
         this.pricePerDay = pricePerDay;
+        this.isAvailable = true;
         this.picURL = picURL;
     }
 
