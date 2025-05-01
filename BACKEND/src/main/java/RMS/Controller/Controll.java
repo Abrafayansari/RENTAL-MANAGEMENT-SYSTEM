@@ -2,9 +2,30 @@ package RMS.Controller;
 
 import RMS.Classes.*;
 import RMS.Services.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.gridfs.GridFsOperations;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import com.mongodb.client.gridfs.model.GridFSFile;
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.gridfs.GridFsOperations;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
+import java.io.InputStream;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +35,12 @@ public class Controll {
 
     @Autowired
     private User_Service user_service;
+
+    @Autowired
+    private GridFsTemplate gridFsTemplate;
+
+    @Autowired
+    private GridFsOperations operations;
 
     @PostMapping("/user")
     public boolean create_user(@RequestBody User u){
@@ -68,10 +95,18 @@ return user_service.login(login.getEmail(),login.getPassword());
     @Autowired
     private Car_Service car_service;
 
-    @PostMapping("/upload-car")
-    Car upload_Car(@RequestBody Car car){
-       return car_service.upload_Car(car);
+    @PostMapping(value = "/upload-car", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Car uploadCar(@RequestPart("car") String carJson, @RequestPart("file") MultipartFile file) throws IOException {
+        // Convert JSON string to Car object manually
+        ObjectMapper mapper = new ObjectMapper();
+        Car car = mapper.readValue(carJson, Car.class);
+
+        ObjectId fileId = gridFsTemplate.store(file.getInputStream(), file.getOriginalFilename(), file.getContentType());
+        car.setPicURL(fileId.toHexString());
+
+        return car_service.upload_Car(car);
     }
+
 
     @GetMapping("/findAll-car")
     public List<Car> findCar(){
@@ -114,5 +149,34 @@ return user_service.login(login.getEmail(),login.getPassword());
     @GetMapping("/getallcar")
     public List<Car>getallcar(){
         return item_service.getcar();
+    }
+
+
+
+    /// //////////////image///////////////////
+
+
+
+
+    @PostMapping("/upload")
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        ObjectId fileId = gridFsTemplate.store(file.getInputStream(), file.getOriginalFilename(), file.getContentType());
+        return ResponseEntity.ok(fileId.toHexString()); // Return the file ID
+    }
+
+    @GetMapping("/{id}")
+    public void getImageById(@PathVariable String id, HttpServletResponse response) throws IOException {
+        GridFSFile file = gridFsTemplate.findOne(Query.query(Criteria.where("_id").is(id)));
+
+        if (file == null) {
+            response.setStatus(HttpStatus.NOT_FOUND.value());
+            return;
+        }
+
+        try (InputStream is = operations.getResource(file).getInputStream()) {
+            response.setContentType(file.getMetadata().get("_contentType").toString());
+            IOUtils.copy(is, response.getOutputStream());
+            response.flushBuffer();
+        }
     }
 }

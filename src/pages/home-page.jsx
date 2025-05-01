@@ -94,7 +94,7 @@ export default function HomePage() {
             }, {
               title: "Clothing",
               image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKGsCLSGirsUkJZbgksAWO9XGxl5BiHGnOaQ&s",
-              tags: ["Formal", "Casual", "Costumes", "Accessories"],
+              tags: ["Formal", "Casual", "Costumes"],
               link: "/clothing"
             }].map((item, i) => (
               <Card key={i} className="overflow-hidden mt-10 h-[70vh] shadow-lg">

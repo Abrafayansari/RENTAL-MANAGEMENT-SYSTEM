@@ -10,23 +10,28 @@ import java.util.List;
 @TypeAlias("Car")
 public class Car extends Item {
     private String brand;
-    private String Location;
+    private String location;
     private String model;
     private int year;
-    private String Type;
-    private String transmissionType;
-    private List<String> Features=new ArrayList<>();
-    public Car(long itemId, String itemName,List<String> Features, double pricePerDay, String picURL,String Location, String brand, String model, int year, String Type, String transmissionType) {
+    private String type;
+    private String transmissiontype;
+    private List<String> features=new ArrayList<>();
+    public Car(long itemId, String itemName,List<String> Features, double pricePerDay, String picURL,String location, String brand, String model, int year, String type, String transmissionType) {
         super(itemId, itemName, "Car", pricePerDay, picURL);
         this.brand = brand;
-        this.Location=Location;
+        this.location=location;
         this.model = model;
-        this.Features=Features;
+        this.features=Features;
         this.year = year;
-        this.Type = Type;
-        this.transmissionType = transmissionType;
+        this.type = type;
+        this.transmissiontype = transmissionType;
     }
-
+    public void setCategory(){
+        this.category="Car";
+    }
+    public Car() {
+        super(); // REQUIRED for deserialization
+    }
     public String getBrand() {
         return brand;
     }
@@ -36,11 +41,11 @@ public class Car extends Item {
     }
 
     public String getLocation() {
-        return Location;
+        return location;
     }
 
     public void setLocation(String location) {
-        Location = location;
+       this.location = location;
     }
 
     public String getModel() {
@@ -59,19 +64,35 @@ public class Car extends Item {
         this.year = year;
     }
 
+    public String getTransmissiontype() {
+        return transmissiontype;
+    }
+
+    public void setTransmissiontype(String transmissiontype) {
+        this.transmissiontype = transmissiontype;
+    }
+
+    public List<String> getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(List<String> features) {
+        this.features = features;
+    }
+
     public String getType() {
-        return Type;
+        return type;
     }
 
     public void setType(String Type) {
-        this.Type = Type;
+        this.type = Type;
     }
 
     public String getTransmissionType() {
-        return transmissionType;
+        return transmissiontype;
     }
 
     public void setTransmissionType(String transmissionType) {
-        this.transmissionType = transmissionType;
+        this.transmissiontype = transmissionType;
     }
 }

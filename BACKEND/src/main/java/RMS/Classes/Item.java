@@ -26,6 +26,16 @@ public class Item {
         this.isAvailable = true;
         this.picURL = picURL;
     }
+public Item(){
+
+}
+    public String getPicURL() {
+        return picURL;
+    }
+
+    public void setPicURL(String picURL) {
+        this.picURL = picURL;
+    }
 
     public long getItemId() {
         return itemId;
