@@ -28,9 +28,15 @@ export default function SignInPage() {
       const loginResponse = await axios.post("http://localhost:1234/login", formData);
       console.log("Login Successful", loginResponse.data);
       alert(loginResponse.data);
-  
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Login failed or User not found! Please check your email and password.");
+    }
+try{
+
+
       // Then Fetch User Info by Email
-      const userResponse = await axios.get(`http://localhost:1234/finduserbyemail/${formData.email}`);
+      const userResponse = await axios.post(`http://localhost:1234/finduserbyemail/${formData.email}`);
       console.log("Fetched User Data", userResponse.data);
       setUser(userResponse.data);
   

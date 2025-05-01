@@ -17,26 +17,26 @@ import ItemDetailsPage from "./pages/items-details-page"
 function App() {
   const [user, setUser] = useState(null);
   return (
-    <UserProvider value={{ user, setUser }}>
-      <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="properties" element={<PropertiesPage />} />
-          <Route path="cars" element={<CarsPage />} />
-          <Route path="clothing" element={<ClothingPage />} />
-          <Route path="how-it-works" element={<HowItWorksPage />} />
-          <Route path="forget-password" element={<div>Forget Pa</div>} />
-          <Route path="details/:itemType/:itemId" element={<ItemDetailsPage />} />
-          <Route path="checkout" element={<CheckoutPage />} />
-          <Route path="dashboard" element={<DashboardPage />} />
-          <Route path="sign-in" element={<SignInPage />} />
-          <Route path="sign-up" element={<SignUpPage />} />
+     <UserProvider value={{ user, setUser }}>
+    //   <Router>
+    //   <Routes> 
+    //     <Route path="/" element={<Layout />}>
+    //       <Route index element={<HomePage />} />
+    //       <Route path="properties" element={<PropertiesPage />} />
+    //       <Route path="cars" element={<CarsPage />} />
+    //       <Route path="clothing" element={<ClothingPage />} />
+    //       <Route path="how-it-works" element={<HowItWorksPage />} />
+    //       <Route path="forget-password" element={<div>Forget Pa</div>} />
+    //       <Route path="details/:itemType/:itemId" element={<ItemDetailsPage />} />
+    //       <Route path="checkout" element={<CheckoutPage />} />
+    //       <Route path="dashboard" element={<DashboardPage />} />
+    //       <Route path="sign-in" element={<SignInPage />} />
+    //       <Route path="sign-up" element={<SignUpPage />} />
 
-        </Route>
-      </Routes>
-    </Router>
-    </UserProvider>
+    //     </Route>
+    //   </Routes>
+    // </Router>
+     </UserProvider>
   )
 }
 

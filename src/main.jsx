@@ -37,7 +37,6 @@ root.render(
           <Route path="sign-in" element={<SignInPage />} />
           <Route path="sign-up" element={<SignUpPage />} />
           <Route path="upload" element={<UploadListingPage />} />
-
           <Route path="details/:itemType/:itemId" element={<ItemDetailsPage />} />
                     <Route path="checkout" element={<CheckoutPage />} />
                     <Route path="dashboard" element={<DashboardPage />} />

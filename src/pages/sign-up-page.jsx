@@ -1,13 +1,15 @@
 "use client"
 import axios from "axios"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
 import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
 import { Card, CardContent } from "../components/ui/card"
 import { FaFacebook, FaGoogle } from "react-icons/fa"
+import { UserContext } from "../hooks/Context"
 
 export default function SignUpPage() {
+  const {setUser}=useContext(UserContext)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -25,8 +27,11 @@ export default function SignUpPage() {
   
     try {
       const response = await axios.post("http://localhost:1234/signup", formData)
-      alert(response.data)  // Show the message from backend: "Signup successful!" or "User already exists!"
+      alert(response.data)  
+      setUser(response.data)// Show the message from backend: "Signup successful!" or "User already exists!"
       console.log(response.data)
+
+
     } catch (error) {
       console.error("Signup error:", error)
       alert("Signup failed. Please try again.")

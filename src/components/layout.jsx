@@ -4,7 +4,7 @@ import { Link, Outlet, useLocation } from "react-router-dom"
 
 export default function Layout() {
   const location = useLocation()
-const User=useContext(UserContext);
+const {User}=useContext(UserContext);
   return (
     <div className="flex min-h-screen flex-col">
       {/* Header */}
@@ -12,7 +12,7 @@ const User=useContext(UserContext);
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 font-bold text-2xl text-primary">
-            RentEase {User?.name}
+            RentEase 
           </Link>
 
           {/* Navigation */}
@@ -39,11 +39,19 @@ const User=useContext(UserContext);
 
           {/* Auth Buttons */}
           <div className="flex items-center gap-4">
-            <Link to="/sign-up">
+            {
+              User?.name?<Link className="flex hover:cursor-alias content-center">
+              <span className="mt-1 mr-2">{User?.name}</span>
+              <button className="hover:scale-125 transition cursor-alias rounded-full w-8 h-8 border-2 border-primary bg-primary  text-sm font-semibold text-primary-foreground  hover:bg-primary/90">
+                
+              </button>
+              </Link>:<Link to="/sign-up">
               <button className="rounded-full border-2 border-primary bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90">
                 Sign Up
               </button>
             </Link>
+            }
+            
           </div>
         </div>
       </header>

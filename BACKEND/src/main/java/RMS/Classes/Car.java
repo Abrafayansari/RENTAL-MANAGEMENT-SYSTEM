@@ -3,21 +3,27 @@ package RMS.Classes;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Document(collection = "items")
 @TypeAlias("Car")
 public class Car extends Item {
     private String brand;
+    private String Location;
     private String model;
     private int year;
-    private String fuelType;
+    private String Type;
     private String transmissionType;
-
-    public Car(long itemId, String itemName, double pricePerDay, String picURL, String brand, String model, int year, String fuelType, String transmissionType) {
+    private List<String> Features=new ArrayList<>();
+    public Car(long itemId, String itemName,List<String> Features, double pricePerDay, String picURL,String Location, String brand, String model, int year, String Type, String transmissionType) {
         super(itemId, itemName, "Car", pricePerDay, picURL);
         this.brand = brand;
+        this.Location=Location;
         this.model = model;
+        this.Features=Features;
         this.year = year;
-        this.fuelType = fuelType;
+        this.Type = Type;
         this.transmissionType = transmissionType;
     }
 
@@ -27,6 +33,14 @@ public class Car extends Item {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String location) {
+        Location = location;
     }
 
     public String getModel() {
@@ -45,12 +59,12 @@ public class Car extends Item {
         this.year = year;
     }
 
-    public String getFuelType() {
-        return fuelType;
+    public String getType() {
+        return Type;
     }
 
-    public void setFuelType(String fuelType) {
-        this.fuelType = fuelType;
+    public void setType(String Type) {
+        this.Type = Type;
     }
 
     public String getTransmissionType() {

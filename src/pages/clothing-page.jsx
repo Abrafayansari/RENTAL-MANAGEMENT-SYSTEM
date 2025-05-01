@@ -23,7 +23,7 @@ import { DatePickerDemo } from "../components/ui/date-picker"
 export default function ClothingPage() {
   const [filters, setFilters] = useState({
     search: "",
-    category: "all",
+    Gender: "",
     size: "all",
     priceRange: "all",
   })
@@ -84,7 +84,7 @@ export default function ClothingPage() {
                 <h3 className="font-medium text-lg mb-4">Search Clothing</h3>
                 <div className="space-y-4">
                   {/* Search Input */}
-                  <div>
+                  {/* <div>
                     <label htmlFor="search" className="text-sm font-medium mb-1 block">
                       Search
                     </label>
@@ -94,26 +94,26 @@ export default function ClothingPage() {
                       value={filters.search}
                       onChange={(e) => setFilters({ ...filters, search: e.target.value })}
                     />
-                  </div>
+                  </div> */}
 
                   {/* Category Selector */}
                   <div>
-                    <label htmlFor="category" className="text-sm font-medium mb-1 block">
-                      Category
+                    <label htmlFor="Gender" className="text-sm font-medium mb-1 block">
+                      Gender
                     </label>
                     <Select
-                      value={filters.category}
-                      onValueChange={(value) => setFilters({ ...filters, category: value })}
+                      value={filters.Gender}
+                      onValueChange={(value) => setFilters({ ...filters, Gender: value })}
                     >
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="All Categories" />
+                        <SelectValue placeholder="Gender" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">All Categories</SelectItem>
-                        <SelectItem value="formal">Formal</SelectItem>
-                        <SelectItem value="casual">Casual</SelectItem>
-                        <SelectItem value="costume">Costumes</SelectItem>
-                        <SelectItem value="accessories">Accessories</SelectItem>
+                        <SelectItem value="all">Gender</SelectItem>
+                        <SelectItem value="Male">Male</SelectItem>
+                        <SelectItem value="Female">Female</SelectItem>
+                        {/* <SelectItem value="costume">Costumes</SelectItem>
+                        <SelectItem value="accessories">Accessories</SelectItem> */}
                       </SelectContent>
                     </Select>
                   </div>
@@ -168,7 +168,7 @@ export default function ClothingPage() {
               </div>
 
               {/* Rental Period Section */}
-              <div className="border rounded-lg p-4">
+              {/* <div className="border rounded-lg p-4">
                 <h3 className="font-medium text-lg mb-4">Rental Period</h3>
                 <div className="space-y-4">
                   <div>
@@ -184,7 +184,7 @@ export default function ClothingPage() {
                     <DatePickerDemo />
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Clothing Listings */}

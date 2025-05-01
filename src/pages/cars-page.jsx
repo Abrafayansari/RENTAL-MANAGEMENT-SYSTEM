@@ -73,17 +73,17 @@ export default function CarsPage() {
                 <div className="space-y-4">
                   <div>
                     <label htmlFor="location" className="text-sm font-medium mb-1 block">
-                      Pick-up Location
+                      Location
                     </label>
                     <Input
                       id="location"
-                      placeholder="City, Airport, or Address"
+                      placeholder="City where you rent it"
                       value={filters.location}
                       onChange={(e) => setFilters({ ...filters, location: e.target.value })}
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 gap-4">
+                  {/* <div className="grid grid-cols-1 gap-4">
                     <div>
                       <label htmlFor="pickup-date" className="text-sm font-medium mb-1 block">
                         Pick-up Date
@@ -96,7 +96,7 @@ export default function CarsPage() {
                       </label>
                       <DatePickerDemo />
                     </div>
-                  </div>
+                  </div> */}
 
                   <div>
                     <label htmlFor="car-type" className="text-sm font-medium mb-1 block">
