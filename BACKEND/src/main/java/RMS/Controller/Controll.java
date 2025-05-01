@@ -114,6 +114,11 @@ return user_service.login(login.getEmail(),login.getPassword());
         return car_service.findCar();
     }
 
+    @GetMapping("/search-car")
+    public List<Car> searchCarByName(@RequestParam String name) {
+        return car_service.searchCarsByName(name);
+    }
+
     ///////////////////clothing////////////////
 
     @Autowired
@@ -123,6 +128,11 @@ return user_service.login(login.getEmail(),login.getPassword());
     public Clothing upload_clothes(@RequestBody Clothing c){
         clothing_service.upload_clothing(c);
         return c;
+    }
+
+    @GetMapping("/search-clothing")
+    public List<Clothing> searchClothingByName(@RequestParam String name) {
+        return clothing_service.searchClothesByName(name);
     }
 
     ///////////////////Property////////////////
@@ -136,7 +146,10 @@ return user_service.login(login.getEmail(),login.getPassword());
         return p;
     }
 
-
+    @GetMapping("/search-property")
+    public List<Property> searchPropertyByName(@RequestParam String name) {
+        return property_service.searchPropertiesByName(name);
+    }
 
     /// ////////////////////Item////////////////
     @Autowired

@@ -21,4 +21,8 @@ public class Car_Service {
     public List<Car> findCar(){
         return car_repo.findAll();
     }
+
+    public List<Car> searchCarsByName(String name) {
+        return car_repo.findByItemNameContainingIgnoreCase(name);
+    }
 }
