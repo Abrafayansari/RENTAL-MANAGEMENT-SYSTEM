@@ -13,9 +13,9 @@ public class  Property_Service {
     @Autowired
     private Property_repo property_repo;
 
-    public boolean uploadProperty(Property p){
+    public Property uploadProperty(Property p){
         property_repo.save(p);
-        return true;
+        return p;
     }
 
     public List<Property> searchPropertiesByName(String name) {

@@ -14,42 +14,47 @@ public class Property extends Item {
     private double areaInSquareFeet;
     private boolean furnished;
     private String type;
-    private String Location;
-    private List<String> Features=new ArrayList<>();
+    private String location;
+    private List<String> features=new ArrayList<>();
 
-    public Property(long itemId,String Location,List<String> Features, String itemName,String Type, double pricePerDay, String picURL, String address, int numberOfRooms, double areaInSquareFeet, boolean furnished) {
-        super(itemId, itemName, "Property", pricePerDay, picURL);
+    public Property(String location,List<String> features, String itemName,String Type, double pricePerDay, String picURL, String address, int numberOfRooms, double areaInSquareFeet, boolean furnished) {
+        super( itemName, "Property", pricePerDay, picURL);
         this.address = address;
-        this.Location=Location;
-        this.Features=Features;
+        this.location=location;
+        this.features=features;
         this.type=Type;
         this.numberOfRooms = numberOfRooms;
         this.areaInSquareFeet = areaInSquareFeet;
         this.furnished = furnished;
     }
-
+public Property(){
+    super(); // This calls Item's no-arg constructor
+    this.setCategory("Property"); // Sets category = "Car"
+    this.setAvailable(true); // Sets availability to true
+    this.setItemId(generateUniqueId()); // Assign unique ID
+}
     public String getAddress() {
         return address;
     }
 
     public List<String> getFeatures() {
-        return Features;
+        return features;
     }
 
     public void setFeatures(List<String> features) {
-        Features = features;
+       this.features = features;
     }
 
     public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getLocation() {
-        return Location;
+    public String getlocation() {
+        return location;
     }
 
-    public void setLocation(String location) {
-        Location = location;
+    public void setlocation(String location) {
+        this.location = location;
     }
 
     public int getNumberOfRooms() {

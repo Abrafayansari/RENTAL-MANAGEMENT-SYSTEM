@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { MapPin, ArrowLeft, ArrowRight } from "lucide-react"
 import {
   Select,
@@ -19,8 +19,10 @@ import {
   Input,
 } from "../components/ui/input"
 import { DatePickerDemo } from "../components/ui/date-picker" 
+import axios from "axios"
 export default function CarsPage() {
   const [filters, setFilters] = useState({
+    name:"",
     location: "",
     carType: "all",
     priceRange: "all",
@@ -49,7 +51,18 @@ export default function CarsPage() {
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXUa_LGCqP-G_QvODPwD8PTJxaD5uIqnSeeg&s",
     },
   ]   
-
+const [data,setData]=useState([]);
+const calldata = async () => {
+  try {
+    const response = await axios.get("http://localhost:1234/getallcar");
+    setData(response.data);
+  } catch (error) {
+    console.error("Error fetching car data:", error);
+  }
+};
+useEffect(() => {
+  calldata();
+}, []);
   return (
     <>
       
@@ -71,6 +84,17 @@ export default function CarsPage() {
               <div className="border rounded-lg p-4">
                 <h3 className="font-medium text-lg mb-4">Search Cars</h3>
                 <div className="space-y-4">
+                <div>
+                    <label htmlFor="name" className="text-sm font-medium mb-1 block">
+                      Car Name
+                    </label>
+                    <Input
+                      id="name"
+                      placeholder="Name the car you want to rent"
+                      value={filters.name}
+                      onChange={(e) => setFilters({ ...filters, name: e.target.value })}
+                    />
+                  </div>
                   <div>
                     <label htmlFor="location" className="text-sm font-medium mb-1 block">
                       Location
@@ -119,7 +143,7 @@ export default function CarsPage() {
                         <SelectItem value="electric">Electric</SelectItem>
                       </SelectContent>
                     </Select>
-                  </div>
+                   </div>
 
                   <div>
                     <label htmlFor="price" className="text-sm font-medium mb-1 block">
@@ -208,7 +232,7 @@ export default function CarsPage() {
             <div className="w-full md:w-3/4">
               <div className="flex justify-between items-center mb-6">
                 <div>
-                  <h2 className="text-xl font-bold">6 cars available</h2>
+                  <h2 className="text-xl font-bold">{data.length} cars available</h2>
                   <p className="text-sm text-muted-foreground">Based on your search</p>
                 </div>
                 <div className="flex items-center gap-2">
@@ -229,26 +253,26 @@ export default function CarsPage() {
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {cars.map((car) => (
-                  <Card key={car.id} className="overflow-hidden">
+                {data.map((car) => (
+                  <Card key={car.id} className=" overflow-hidden">
                     <div className="relative aspect-video">
-                      <img
-                        src={car.image || "/placeholder.svg"}
-                        alt={car.title}
-                        className="object-cover w-full h-full"
-                      />
+                    <img
+  src={`http://localhost:1234/${car.picURL}` || "/placeholder.svg"}
+  alt={car.itemName}
+  className="object-cover w-full h-full"
+/>
                     </div>
                     <CardContent className="!p-4 ">
                       <div className="flex justify-between items-start">
                         <div>
-                          <h3 className="font-bold">{car.title}</h3>
+                          <h3 className="font-bold">{car.itemName}</h3>
                           <div className="flex items-center text-sm text-muted-foreground mt-1">
                             <MapPin className="h-3 w-3 mr-1" />
                             <span>{car.location}</span>
                           </div>
                         </div>
                         <div>
-                          <span className="font-bold">${car.price}</span>
+                          <span className="font-bold">${car.pricePerDay}</span>
                           <span className="text-sm text-muted-foreground"> /day</span>
                         </div>
                       </div>
@@ -260,8 +284,8 @@ export default function CarsPage() {
                           <svg className="h-4 w-4 fill-primary" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                           </svg>
-                          <span className="ml-1 text-sm font-medium">{car.rating}</span>
-                          <span className="ml-1 text-xs text-muted-foreground">({car.reviews} reviews)</span>
+                          <span className="ml-1 text-sm font-medium">{car.transmissiontype}</span>
+                          <span className="ml-1 text-xs text-muted-foreground">({car.brand})</span>
                         </div>
                       </div>
                       <Button className="w-full mt-4">Book Now</Button>

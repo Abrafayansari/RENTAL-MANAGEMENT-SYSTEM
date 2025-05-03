@@ -1,7 +1,9 @@
 package RMS.Services;
 
 import RMS.Classes.Car;
+import RMS.Classes.Clothing;
 import RMS.Classes.Item;
+import RMS.Classes.Property;
 import RMS.Repository.Item_repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,5 +30,27 @@ public class Item_Service {
           }
       }
       return cars;
+    }
+    public List<Clothing> getcloth(){
+        List<Item>items=  getitem();
+        List<Clothing>clothes=new ArrayList();
+        for (Item i:items){
+            if(i.getCategory().equalsIgnoreCase("Clothing")) {
+                clothes.add((Clothing) i);
+            }
+        }
+        return clothes;
+    }
+
+
+    public List<Property> getproperty(){
+        List<Item>items=  getitem();
+        List<Property>properties=new ArrayList();
+        for (Item i:items){
+            if(i.getCategory().equalsIgnoreCase("Property")) {
+                properties.add((Property) i);
+            }
+        }
+        return properties;
     }
 }

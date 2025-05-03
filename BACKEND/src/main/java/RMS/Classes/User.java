@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Document
 public class User {
@@ -21,6 +22,7 @@ public class User {
 
     public User(String name, String email, String phoneNumber, String password, String address) {
         this.name = name;
+        this.id=generateUniqueId();
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
@@ -37,7 +39,12 @@ public class User {
     public static void setUser_Count(long user_Count) {
         User.user_Count = user_Count;
     }
-
+    public  long generateUniqueId() {
+        long timestamp = System.currentTimeMillis();             // e.g., 1714642200000
+        int randomPart = new Random().nextInt(900) + 100;        // random 3-digit number: 100–999
+        String idString = timestamp + String.valueOf(randomPart); // concatenate as string
+        return Long.parseLong(idString);                         // convert to long
+    }
     public Long getId() {
         return id;
     }

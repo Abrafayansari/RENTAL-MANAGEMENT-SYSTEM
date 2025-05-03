@@ -16,8 +16,8 @@ public class Car extends Item {
     private String type;
     private String transmissiontype;
     private List<String> features=new ArrayList<>();
-    public Car(long itemId, String itemName,List<String> Features, double pricePerDay, String picURL,String location, String brand, String model, int year, String type, String transmissionType) {
-        super(itemId, itemName, "Car", pricePerDay, picURL);
+    public Car( String itemName,List<String> Features, double pricePerDay, String picURL,String location, String brand, String model, int year, String type, String transmissionType) {
+        super( itemName, "Car", pricePerDay, picURL);
         this.brand = brand;
         this.location=location;
         this.model = model;
@@ -30,7 +30,10 @@ public class Car extends Item {
         this.category="Car";
     }
     public Car() {
-        super(); // REQUIRED for deserialization
+        super(); // This calls Item's no-arg constructor
+        this.setCategory(); // Sets category = "Car"
+        this.setAvailable(true); // Sets availability to true
+        this.setItemId(generateUniqueId()); // Assign unique ID
     }
     public String getBrand() {
         return brand;

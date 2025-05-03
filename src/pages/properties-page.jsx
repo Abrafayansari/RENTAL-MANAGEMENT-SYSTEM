@@ -1,12 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ArrowLeft, ArrowRight, MapPin } from "lucide-react"
 
 import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
 import { Card, CardContent } from "../components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
+import axios from "axios"
 
 export default function PropertiesPage() {
   const [filters, setFilters] = useState({
@@ -78,7 +79,18 @@ export default function PropertiesPage() {
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiB3JaM2F3_8PNSqBFvxZwcCCYJhEn4hx2VA&s",
     },
   ]
-
+const [data,setData]=useState([]);
+const calldata = async () => {
+  try {
+    const response = await axios.get("http://localhost:1234/getallproperty");
+    setData(response.data);
+  } catch (error) {
+    console.error("Error fetching car data:", error);
+  }
+};
+useEffect(() => {
+  calldata();
+}, []);
   return (
     <>
       <section className="w-full py-12 md:py-16 lg:py-20 bg-muted">
@@ -226,7 +238,7 @@ export default function PropertiesPage() {
             <div className="w-full md:w-3/4">
               <div className="flex justify-between items-center mb-6">
                 <div>
-                  <h2 className="text-xl font-bold">6 properties available</h2>
+                  <h2 className="text-xl font-bold">{data.length} properties available</h2>
                   <p className="text-sm text-muted-foreground">Based on your filters</p>
                 </div>
                 <div className="flex items-center gap-2">
@@ -248,26 +260,26 @@ export default function PropertiesPage() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {properties.map((property) => (
+                {data.map((property) => (
                   <Card key={property.id} className="overflow-hidden">
                     <div className="relative aspect-video">
-                      <img
-                        src={property.image || "/placeholder.svg"}
-                        alt={property.title}
-                        className="object-cover w-full h-full"
-                      />
+                    <img
+  src={`http://localhost:1234/${property.picURL}` || "/placeholder.svg"}
+  alt={property.itemName}
+  className="object-cover w-full h-full"
+/>
                     </div>
                     <CardContent className="!p-4">
                       <div className="flex justify-between items-start">
                         <div>
-                          <h3 className="font-bold">{property.title}</h3>
+                          <h3 className="font-bold">{property.itemName}</h3>
                           <div className="flex items-center text-sm text-muted-foreground mt-1">
                             <MapPin className="h-3 w-3 mr-1" />
                             <span>{property.location}</span>
                           </div>
                         </div>
                         <div>
-                          <span className="font-bold">${property.price}</span>
+                          <span className="font-bold">${property.pricePerDay}</span>
                           <span className="text-sm text-muted-foreground"> /night</span>
                         </div>
                       </div>
@@ -279,8 +291,8 @@ export default function PropertiesPage() {
                           <svg className="h-4 w-4 fill-primary" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                           </svg>
-                          <span className="ml-1 text-sm font-medium">{property.rating}</span>
-                          <span className="ml-1 text-xs text-muted-foreground">({property.reviews} reviews)</span>
+                          <span className="ml-1 text-sm font-medium">{property.areaInSquareFeet}</span>
+                          <span className="ml-1 text-xs text-muted-foreground">(Sqft)</span>
                         </div>
                       </div>
                       <Button className="w-full mt-4">View Details</Button>

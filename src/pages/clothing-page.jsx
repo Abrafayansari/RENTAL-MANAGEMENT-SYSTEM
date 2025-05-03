@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import {
   Select,
@@ -19,9 +19,11 @@ import {
   Input,
 } from "../components/ui/input"
 import { DatePickerDemo } from "../components/ui/date-picker" 
+import axios from "axios"
 
 export default function ClothingPage() {
   const [filters, setFilters] = useState({
+    name:"",
     search: "",
     Gender: "",
     size: "all",
@@ -56,7 +58,18 @@ export default function ClothingPage() {
     },
     // Add more items as needed...
   ]
-
+  const [data,setData]=useState([]);
+  const calldata = async () => {
+    try {
+      const response = await axios.get("http://localhost:1234/getallcloth");
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching car data:", error);
+    }
+  };
+  useEffect(() => {
+    calldata();
+  }, []);
   return (
     <>
       {/* Hero Section */}
@@ -97,6 +110,17 @@ export default function ClothingPage() {
                   </div> */}
 
                   {/* Category Selector */}
+                  <div>
+                                      <label htmlFor="name" className="text-sm font-medium mb-1 block">
+                                        Name
+                                      </label>
+                                      <Input
+                                        id="name"
+                                        placeholder="Name the car you want to rent"
+                                        value={filters.name}
+                                        onChange={(e) => setFilters({ ...filters, name: e.target.value })}
+                                      />
+                                    </div>
                   <div>
                     <label htmlFor="Gender" className="text-sm font-medium mb-1 block">
                       Gender
@@ -212,32 +236,32 @@ export default function ClothingPage() {
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {clothing.map((item) => (
+                {data.map((item) => (
                   <Card key={item.id} className="overflow-hidden">
                     <div className="relative aspect-square">
-                      <img
-                        src={item.image || "/placeholder.svg"}
-                        alt={item.title}
-                        className="object-cover w-full h-full"
-                      />
+                    <img
+  src={`http://localhost:1234/${item.picURL}` || "/placeholder.svg"}
+  alt={item.itemName}
+  className="object-cover w-full h-full"
+/>
                     </div>
                     <CardContent className="!p-4">
                       <div className="space-y-1">
-                        <h3 className="font-bold">{item.title}</h3>
-                        <p className="text-sm text-muted-foreground">{item.designer}</p>
+                        <h3 className="font-bold">{item.itemName}</h3>
+                        <p className="text-sm text-muted-foreground">{item.material}</p>
                       </div>
                       <div className="flex items-center justify-between mt-2">
                         <span className="bg-primary/10 text-primary text-xs font-medium px-2 py-1 rounded">
-                          {item.category}
+                          {item.brand}
                         </span>
                         <div>
-                          <span className="font-bold">${item.price}</span>
+                          <span className="font-bold">${item.pricePerDay}</span>
                           <span className="text-sm text-muted-foreground"> /day</span>
                         </div>
                       </div>
                       <div className="mt-3">
                         <p className="text-sm">
-                          <span className="font-medium">Sizes:</span> {item.size}
+                          <span className="font-medium">Size:</span> {item.size}
                         </p>
                       </div>
                       <div className="flex items-center mt-2">
@@ -245,7 +269,7 @@ export default function ClothingPage() {
                           <svg className="h-4 w-4 fill-primary" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.455c.969 0 1.371 1.24.588 1.81l-2.79 2.023a1 1 0 0 0-.364 1.118l1.062 3.49c.303.987-.84 1.81-1.704 1.289l-2.957-2.111a1 1 0 0 0-1.181 0l-2.957 2.11c-.864.522-2.007-.303-1.704-1.29l1.062-3.49a1 1 0 0 0-.364-1.118L3.538 8.728c-.784-.57-.38-1.81.588-1.81h3.455a1 1 0 0 0 .95-.69l1.07-3.292z" />
                           </svg>
-                          <span className="text-xs text-muted-foreground ml-1">{item.reviews} reviews</span>
+                          <span className="text-xs text-muted-foreground ml-1">{item.gender}</span>
                         </div>
                       </div>
                       <Button className="w-full mt-4">Rent Now</Button>

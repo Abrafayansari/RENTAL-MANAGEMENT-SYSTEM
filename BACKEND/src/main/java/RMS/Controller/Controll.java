@@ -124,10 +124,27 @@ return user_service.login(login.getEmail(),login.getPassword());
     @Autowired
     Clothing_Service clothing_service;
 
-    @PostMapping("/upload-clothing")
-    public Clothing upload_clothes(@RequestBody Clothing c){
-        clothing_service.upload_clothing(c);
-        return c;
+//    @PostMapping("/upload-clothing")
+//    public Clothing upload_clothes(@RequestBody Clothing c){
+//        clothing_service.upload_clothing(c);
+//        return c;
+//    }
+
+    @GetMapping("/findAll-clothing")
+    public List<Clothing> findcloth(){
+        return clothing_service.findcloth();
+    }
+
+     @PostMapping(value = "/upload-clothing", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Clothing uploadClothing(@RequestPart("cloth") String clothJson, @RequestPart("file") MultipartFile file) throws IOException {
+        // Convert JSON string to cloth object manually
+        ObjectMapper mapper = new ObjectMapper();
+        Clothing cloth = mapper.readValue(clothJson, Clothing.class);
+
+        ObjectId fileId = gridFsTemplate.store(file.getInputStream(), file.getOriginalFilename(), file.getContentType());
+        cloth.setPicURL(fileId.toHexString());
+
+        return clothing_service.upload_clothing(cloth);
     }
 
     @GetMapping("/search-clothing")
@@ -140,10 +157,22 @@ return user_service.login(login.getEmail(),login.getPassword());
     @Autowired
     Property_Service property_service;
 
-    @PostMapping("/upload-property")
-    public Property upload_property(@RequestBody Property p){
-        property_service.uploadProperty(p);
-        return p;
+//    @PostMapping("/upload-property")
+//    public Property upload_property(@RequestBody Property p){
+//        property_service.uploadProperty(p);
+//        return p;
+//    }
+
+    @PostMapping(value = "/upload-property", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Property uploadproperty(@RequestPart("property") String propertyJson, @RequestPart("file") MultipartFile file) throws IOException {
+        // Convert JSON string to cloth object manually
+        ObjectMapper mapper = new ObjectMapper();
+        Property property = mapper.readValue(propertyJson, Property.class);
+
+        ObjectId fileId = gridFsTemplate.store(file.getInputStream(), file.getOriginalFilename(), file.getContentType());
+        property.setPicURL(fileId.toHexString());
+
+        return property_service.uploadProperty(property);
     }
 
     @GetMapping("/search-property")
@@ -162,6 +191,15 @@ return user_service.login(login.getEmail(),login.getPassword());
     @GetMapping("/getallcar")
     public List<Car>getallcar(){
         return item_service.getcar();
+    }
+    @GetMapping("/getallcloth")
+    public List<Clothing>getallcloth(){
+        return item_service.getcloth();
+    }
+
+    @GetMapping("/getallproperty")
+    public List<Property>getallproperty(){
+        return item_service.getproperty();
     }
 
 

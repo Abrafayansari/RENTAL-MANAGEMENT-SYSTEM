@@ -3,7 +3,6 @@ package RMS.Classes;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Collection;
 
 @Document(collection="items")
 @TypeAlias("Clothing")
@@ -11,20 +10,35 @@ public class Clothing extends Item {
     private String size;
     private String material;
     private String gender; // Men, Women
+    private String brand;
 
-    public Clothing(long itemId, String itemName, double pricePerDay, String picURL, String size, String material, String gender) {
-        super(itemId, itemName, "Clothing", pricePerDay, picURL);
+    public Clothing( String itemName, double pricePerDay,String brand, String picURL, String size, String material, String gender) {
+        super( itemName, "Clothing", pricePerDay, picURL);
         this.size = size;
         this.material = material;
         this.gender = gender;
+        this.brand=brand;
     }
-
+public Clothing(){
+    super(); // This calls Item's no-arg constructor
+    this.setCategory("Clothing"); // Sets category = "Car"
+    this.setAvailable(true); // Sets availability to true
+    this.setItemId(generateUniqueId()); // Assign unique ID
+}
     public String getSize() {
         return size;
     }
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public String getMaterial() {

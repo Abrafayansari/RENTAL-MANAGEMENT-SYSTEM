@@ -5,6 +5,7 @@ import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Collection;
+import java.util.Random;
 
 @Document(collection = "items")
 @TypeAlias("Item")
@@ -18,21 +19,27 @@ public class Item {
     protected boolean isAvailable;
     protected String picURL;
 
-    public Item(long itemId, String itemName, String category, double pricePerDay, String picURL) {
-        this.itemId = itemId;
+    public Item(String itemName, String category, double pricePerDay, String picURL) {
+        this.itemId = generateUniqueId();
         this.itemName = itemName;
         this.category = category;
         this.pricePerDay = pricePerDay;
         this.isAvailable = true;
         this.picURL = picURL;
     }
-public Item(){
-
-}
+    public Item() {
+        this.itemId = generateUniqueId();
+        this.isAvailable = true;
+    }
     public String getPicURL() {
         return picURL;
     }
-
+    public  long generateUniqueId() {
+        long timestamp = System.currentTimeMillis();             // e.g., 1714642200000
+        int randomPart = new Random().nextInt(900) + 100;        // random 3-digit number: 100–999
+        String idString = timestamp + String.valueOf(randomPart); // concatenate as string
+        return Long.parseLong(idString);                         // convert to long
+    }
     public void setPicURL(String picURL) {
         this.picURL = picURL;
     }
@@ -74,6 +81,6 @@ public Item(){
     }
 
     public void setAvailable(boolean available) {
-        isAvailable = available;
+        this.isAvailable = available;
     }
 }
