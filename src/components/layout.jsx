@@ -1,6 +1,7 @@
 import  {UserContext}  from "../hooks/Context"
 import { useContext } from "react"
 import { Link, Outlet, useLocation } from "react-router-dom"
+import PostButton from "./ui/Postbutton";
 
 export default function Layout() {
   const location = useLocation()
@@ -39,6 +40,7 @@ const {User}=useContext(UserContext);
 
           {/* Auth Buttons */}
           <div className="flex items-center gap-4">
+            <PostButton/>
             {
               User?.name?<Link className="flex hover:cursor-alias content-center">
               <span className="mt-1 mr-2">{User?.name}</span>

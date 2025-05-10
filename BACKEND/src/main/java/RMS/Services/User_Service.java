@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,7 +89,7 @@ public class User_Service {
 @Autowired
 private Item_repo item_repo;
 
-    public boolean uploadRentedItem(Long userId, Long itemId) {
+public boolean uploadRentedItem(LocalDate enddate,Long userId, Long itemId) {
         Optional<User> optuser = user_repo.findById(userId);
         Optional<Item> optitem = item_repo.findById(itemId);
 
@@ -98,6 +99,8 @@ private Item_repo item_repo;
 
             if (item.isAvailable()) {
                 item.setAvailable(false);
+                item.setEnd(enddate);
+                item.setStart(LocalDate.now());
                 user.setRentedItems(item);
                 user_repo.save(user);
                 item_repo.save(item);

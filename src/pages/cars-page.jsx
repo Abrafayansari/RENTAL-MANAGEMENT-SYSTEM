@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { MapPin, ArrowLeft, ArrowRight } from "lucide-react"
 import {
   Select,
@@ -20,6 +20,7 @@ import {
 } from "../components/ui/input"
 import { DatePickerDemo } from "../components/ui/date-picker" 
 import axios from "axios"
+import { ItemContext } from "../hooks/Context"
 export default function CarsPage() {
   const [filters, setFilters] = useState({
     name:"",
@@ -51,6 +52,8 @@ export default function CarsPage() {
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXUa_LGCqP-G_QvODPwD8PTJxaD5uIqnSeeg&s",
     },
   ]   
+  const {Item,setItem}=useContext(ItemContext)
+const {carddata,setcarddata}=useState();
 const [data,setData]=useState([]);
 const calldata = async () => {
   try {
@@ -254,8 +257,9 @@ useEffect(() => {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {data.map((car) => (
+                  
                   <Card key={car.id} className=" overflow-hidden">
-                    <div className="relative aspect-video">
+                      <div className="relative aspect-video">
                     <img
   src={`http://localhost:1234/${car.picURL}` || "/placeholder.svg"}
   alt={car.itemName}
@@ -288,7 +292,8 @@ useEffect(() => {
                           <span className="ml-1 text-xs text-muted-foreground">({car.brand})</span>
                         </div>
                       </div>
-                      <Button className="w-full mt-4">Book Now</Button>
+                      <Button route={"/upload"} context={car} className="w-full mt-4">Book Now</Button>
+
                     </CardContent>
                   </Card>
                 ))}

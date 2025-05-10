@@ -17,8 +17,8 @@ public class Property extends Item {
     private String location;
     private List<String> features=new ArrayList<>();
 
-    public Property(String location,List<String> features, String itemName,String Type, double pricePerDay, String picURL, String address, int numberOfRooms, double areaInSquareFeet, boolean furnished) {
-        super( itemName, "Property", pricePerDay, picURL);
+    public Property(String location,List<String> features,Long owner_id, String description,String itemName,String Type, double pricePerDay, String picURL, String address, int numberOfRooms, double areaInSquareFeet, boolean furnished) {
+        super( itemName, "Property", owner_id,description,pricePerDay, picURL);
         this.address = address;
         this.location=location;
         this.features=features;

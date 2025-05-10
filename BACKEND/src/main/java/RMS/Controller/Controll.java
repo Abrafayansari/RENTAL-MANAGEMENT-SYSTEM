@@ -26,6 +26,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -79,8 +80,8 @@ return user_service.login(login.getEmail(),login.getPassword());
 //            return user.getRentedItems();
 //        }
     @PostMapping("/uploadrenteditems/{userid}/{itemid}")
-    public Optional<User> uploadrentaeditems(@PathVariable Long userid, @PathVariable Long itemid ){
-       boolean clearance= user_service.uploadRentedItem(userid,itemid);
+    public Optional<User> uploadrentaeditems(@RequestBody LocalDate end, @PathVariable Long userid, @PathVariable Long itemid ){
+       boolean clearance= user_service.uploadRentedItem(end,userid,itemid);
        if(clearance){
            return user_service.finduserbyid(userid);
        }

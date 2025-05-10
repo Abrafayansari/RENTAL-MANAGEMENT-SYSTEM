@@ -11,25 +11,29 @@ import java.util.Random;
 public class User {
     public static long user_Count=0;
     @Id
-    private Long id;
+    private Long id=generateUniqueId();
     private String name;
     private String email;
     private String phoneNumber;
     private String password;
     private String address;
     private List <Item> rentedItems;
-    private List<Listing> listings;
+    private List<Item> listings;
 
     public User(String name, String email, String phoneNumber, String password, String address) {
         this.name = name;
-        this.id=generateUniqueId();
+
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.address = address;
+        this.rentedItems=new ArrayList<>();
         this.listings = new ArrayList<>();
         user_Count++;
         this.id =user_Count;
+    }public User(){
+        this.id=generateUniqueId();
+
     }
 
     public static long getUser_Count() {
@@ -101,12 +105,13 @@ public class User {
         this.address = address;
     }
 
-    public List<Listing> getListings() {
+    public List<Item> getListings() {
         return listings;
     }
 
-    public void setListings(ArrayList<Listing> listings) {
-        this.listings = listings;
+    public void setListings(Item listings) {
+
+        this.listings.add(listings);
     }
 }
 

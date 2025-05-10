@@ -2,6 +2,10 @@
 // // Button.tsx
 // import { cva } from "class-variance-authority"
 
+import { ItemContext } from "../../hooks/Context"
+import { useContext } from "react"
+import { useNavigate } from "react-router-dom"
+
 // /**
 //  * Button Variants
 //  */
@@ -48,7 +52,7 @@
 // export { buttonVariants }
 
 
-export function Button({ children, className, variant = "default", size = "default", ...props }) {
+export function Button({ children, className,route,context, variant = "default", size = "default", ...props }) {
   const baseStyles =
     "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background"
 
@@ -65,13 +69,22 @@ export function Button({ children, className, variant = "default", size = "defau
     lg: "h-11 px-8 rounded-md text-lg",
     icon: "h-10 w-10",
   }
+const{Item,setItem}=useContext(ItemContext)
+
+
 
   const variantStyle = variants[variant] || variants.default
   const sizeStyle = sizes[size] || sizes.default
-
+const navigate=useNavigate();
   return (
-    <button className={`${baseStyles} ${variantStyle} ${sizeStyle} ${className || ""}`} {...props}>
+    
+    <button onClick={()=>{
+      setItem(context)
+      navigate(route);
+       
+    }}  className={`${baseStyles} ${variantStyle} ${sizeStyle} ${className || ""}`} {...props}>
       {children}
+      
     </button>
   )
 }

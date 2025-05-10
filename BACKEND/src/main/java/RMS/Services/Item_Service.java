@@ -17,40 +17,32 @@ public class Item_Service {
     @Autowired
     Item_repo item_repo;
 
-    public List<Item> getitem(){
+    // Get all items from the repository
+    public List<Item> getitem() {
         return item_repo.findAll();
     }
 
-    public List<Car> getcar(){
-      List<Item>items=  getitem();
-      List<Car>cars=new ArrayList();
-      for (Item i:items){
-          if(i.getCategory().equalsIgnoreCase("car")) {
-              cars.add((Car) i);
-          }
-      }
-      return cars;
-    }
-    public List<Clothing> getcloth(){
-        List<Item>items=  getitem();
-        List<Clothing>clothes=new ArrayList();
-        for (Item i:items){
-            if(i.getCategory().equalsIgnoreCase("Clothing")) {
-                clothes.add((Clothing) i);
+    // Generic method to filter items by category and type
+    private <T extends Item> List<T> filterItemsByCategory(String category, Class<T> clazz) {
+        List<T> result = new ArrayList<>();
+        for (Item i : this.getitem()) {
+            if (category.equalsIgnoreCase(i.getCategory()) && clazz.isInstance(i)) {
+                result.add(clazz.cast(i));
             }
         }
-        return clothes;
+        return result;
     }
 
+    // Specific getters using the generic filter method
+    public List<Car> getcar() {
+        return filterItemsByCategory("Car", Car.class);
+    }
 
-    public List<Property> getproperty(){
-        List<Item>items=  getitem();
-        List<Property>properties=new ArrayList();
-        for (Item i:items){
-            if(i.getCategory().equalsIgnoreCase("Property")) {
-                properties.add((Property) i);
-            }
-        }
-        return properties;
+    public List<Clothing> getcloth() {
+        return filterItemsByCategory("Clothing", Clothing.class);
+    }
+
+    public List<Property> getproperty() {
+        return filterItemsByCategory("Property", Property.class);
     }
 }

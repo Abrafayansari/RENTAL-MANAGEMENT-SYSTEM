@@ -12,7 +12,7 @@ import HowItWorksPage from "./pages/how-it-works-page"
 import SignInPage from "./pages/sign-in-page"
 import SignUpPage from "./pages/sign-up-page"
 import ForgetPassword from "./pages/forget-password-page"
-import { UserProvider } from "./hooks/Context"
+import { ItemProvider, UserProvider } from "./hooks/Context"
 import DashboardPage from "./pages/dashboard-page"
 import CheckoutPage from "./pages/checkout-page"
 import ItemDetailsPage from "./pages/items-details-page"
@@ -25,6 +25,7 @@ root.render(
   
   <React.StrictMode>
       <UserProvider>
+        <ItemProvider>
 
     <BrowserRouter>
       <Routes>
@@ -38,13 +39,14 @@ root.render(
           <Route path="sign-up" element={<SignUpPage />} />
           <Route path="upload" element={<UploadListingPage />} />
           <Route path="details/:itemType/:itemId" element={<ItemDetailsPage />} />
-                    <Route path="checkout" element={<CheckoutPage />} />
+                  <Route path="checkout" element={<CheckoutPage />} />
                     <Route path="dashboard" element={<DashboardPage />} />
           <Route path="forget-password" element={<ForgetPassword />} />
 
         </Route>
       </Routes>
     </BrowserRouter>
+    </ItemProvider>
     </UserProvider>
 
   </React.StrictMode>,

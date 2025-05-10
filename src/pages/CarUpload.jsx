@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useContext } from "react"
 import { Link } from "react-router-dom"
 import { Upload, X, Plus, Info, MapPin, DollarSign, Calendar, CheckCircle } from "lucide-react"
 import { Button } from "../components/ui/button"
@@ -8,16 +8,18 @@ import { Card, CardContent } from "../components/ui/card"
 import { Input } from "../components/ui/input"
 import { Select } from "@radix-ui/react-select"
 import axios from "axios";
+import { UserContext } from "../hooks/Context"
 export default function CarUpload() {
   const [images, setImages] = useState([])
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const fileInputRef = useRef(null)
-
+const {User}=useContext(UserContext)
     const [form, setForm] = useState({
     itemName: "",
     pricePerDay: "",
-    brand: "",
+    owner_id:User.id,
+        brand: "",
     location: "",
     model: "",
     year: "",

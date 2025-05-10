@@ -16,13 +16,14 @@ public class Car extends Item {
     private String type;
     private String transmissiontype;
     private List<String> features=new ArrayList<>();
-    public Car( String itemName,List<String> Features, double pricePerDay, String picURL,String location, String brand, String model, int year, String type, String transmissionType) {
-        super( itemName, "Car", pricePerDay, picURL);
+    public Car( String itemName,List<String> Features,Long owner_id,String description, double pricePerDay, String picURL,String location, String brand, String model, int year, String type, String transmissionType) {
+        super( itemName, "Car",owner_id,description, pricePerDay, picURL);
         this.brand = brand;
         this.location=location;
         this.model = model;
         this.features=Features;
         this.year = year;
+
         this.type = type;
         this.transmissiontype = transmissionType;
     }

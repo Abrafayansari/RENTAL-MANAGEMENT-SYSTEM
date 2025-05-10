@@ -363,58 +363,7 @@ export default function ItemDetailsPage() {
                   </div>
                 </div>
 
-                {/* Sample reviews */}
-                <div className="space-y-6">
-                  <div className="border-b pb-6">
-                    <div className="flex items-center mb-2">
-                      <img src="https://placehold.co/50x50" alt="Reviewer" className="w-10 h-10 rounded-full mr-3" />
-                      <div>
-                        <p className="font-medium">John D.</p>
-                        <p className="text-xs text-muted-foreground">April 2023</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-secondary text-secondary" />
-                      ))}
-                    </div>
-                    <p className="text-muted-foreground">
-                      {itemType === "properties" &&
-                        "This apartment exceeded our expectations! The location was perfect, and the amenities were exactly as described. We especially loved the city views and how close it was to restaurants and shopping."}
-                      {itemType === "cars" &&
-                        "Fantastic car! Clean, well-maintained, and a joy to drive. The owner was very responsive and made the pickup and return process incredibly smooth."}
-                      {itemType === "clothing" &&
-                        "The dress was absolutely stunning and fit perfectly. I received so many compliments at the event. The quality was impeccable, and it arrived on time in perfect condition."}
-                    </p>
-                  </div>
-
-                  <div className="border-b pb-6">
-                    <div className="flex items-center mb-2">
-                      <img src="https://placehold.co/50x50" alt="Reviewer" className="w-10 h-10 rounded-full mr-3" />
-                      <div>
-                        <p className="font-medium">Emily R.</p>
-                        <p className="text-xs text-muted-foreground">March 2023</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-secondary text-secondary" />
-                      ))}
-                    </div>
-                    <p className="text-muted-foreground">
-                      {itemType === "properties" &&
-                        "We had a wonderful stay! The apartment was clean, comfortable, and had everything we needed. The host was very responsive and provided great local recommendations."}
-                      {itemType === "cars" &&
-                        "This Tesla was amazing to drive! It was my first time driving an electric car, and I'm now convinced I need one. The car was spotless and fully charged when I picked it up."}
-                      {itemType === "clothing" &&
-                        "The gown was perfect for my event. The fit was true to size, and the quality was exceptional. The rental process was seamless from start to finish."}
-                    </p>
-                  </div>
-                </div>
-
-                <Button variant="outline" className="mt-4 w-full">
-                  View all {item.reviews} reviews
-                </Button>
+               
               </div>
             </div>
           </div>

@@ -12,8 +12,8 @@ public class Clothing extends Item {
     private String gender; // Men, Women
     private String brand;
 
-    public Clothing( String itemName, double pricePerDay,String brand, String picURL, String size, String material, String gender) {
-        super( itemName, "Clothing", pricePerDay, picURL);
+    public Clothing( String itemName, double pricePerDay,String brand,Long owner_id,String description, String picURL, String size, String material, String gender) {
+        super( itemName, "Clothing",owner_id,description, pricePerDay, picURL);
         this.size = size;
         this.material = material;
         this.gender = gender;
