@@ -1,25 +1,28 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useContext } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import { Upload, X, Plus, Info, MapPin, DollarSign, Calendar, CheckCircle } from "lucide-react"
 import { Button } from "../components/ui/button"
 import { Card, CardContent } from "../components/ui/card"
 import { Input } from "../components/ui/input"
+import { UserContext } from "../hooks/Context"
 
 export default function PropertyUpload() {
   const [images, setImages] = useState([])
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const fileInputRef = useRef(null)
-
+const {User}=useContext(UserContext)
   const [form, setForm] = useState({
     itemName: "",
     pricePerDay: "",
     address: "",
     numberOfRooms: "",
     areaInSquareFeet: "",
+    owner_id:User.id,
+    description:"",
     furnished: false,
     type: "",
     location: "",
@@ -136,6 +139,7 @@ export default function PropertyUpload() {
           numberOfRooms: "",
           areaInSquareFeet: "",
           furnished: false,
+          description:"",
           type: "",
           location: "",
           features: []
@@ -398,6 +402,19 @@ export default function PropertyUpload() {
                       </div>
                     ))}
                   </div>
+                </div>
+                 <div>
+                  <label htmlFor="description" className="block text-sm font-medium mb-1">
+                     Description*
+                  </label>
+                  <textarea
+                className="w-full border p-4 rounded-lg h-10"
+                    id="description"
+                    name="description"
+                    placeholder="e.g., Verygood and out class....."
+                    value={form.description} onChange={handleChange}
+                    required
+                  />
                 </div>
               </div>
             </CardContent>

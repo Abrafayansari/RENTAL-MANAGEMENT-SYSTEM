@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { ArrowLeft, ArrowRight, MapPin } from "lucide-react"
 
 import { Button } from "../components/ui/button"
@@ -8,6 +8,7 @@ import { Input } from "../components/ui/input"
 import { Card, CardContent } from "../components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
 import axios from "axios"
+import { ItemContext } from "../hooks/Context"
 
 export default function PropertiesPage() {
   const [filters, setFilters] = useState({
@@ -15,7 +16,7 @@ export default function PropertiesPage() {
     type: "all",
     priceRange: "all",
   })
-
+const {Item,setItem}=useContext(ItemContext)
   // Mock data for properties
   const properties = [
     {
@@ -295,7 +296,7 @@ useEffect(() => {
                           <span className="ml-1 text-xs text-muted-foreground">(Sqft)</span>
                         </div>
                       </div>
-                      <Button className="w-full mt-4">View Details</Button>
+                      <Button route={"/propertydetail"} context={property} className="w-full mt-4">View Details</Button>
                     </CardContent>
                   </Card>
                 ))}

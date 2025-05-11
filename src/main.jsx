@@ -17,6 +17,9 @@ import DashboardPage from "./pages/dashboard-page"
 import CheckoutPage from "./pages/checkout-page"
 import ItemDetailsPage from "./pages/items-details-page"
 import UploadListingPage from "./pages/upload-listing-page"
+import PropertyForm from "./pages/PropertyForm"
+import CarDetails from "./pages/CarDetails"
+import ClothingDetails from "./pages/ClothingDetails"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 
@@ -41,6 +44,10 @@ root.render(
           <Route path="details/:itemType/:itemId" element={<ItemDetailsPage />} />
                   <Route path="checkout" element={<CheckoutPage />} />
                     <Route path="dashboard" element={<DashboardPage />} />
+                                      <Route path="propertydetail" element={<PropertyForm />} />
+                    <Route path="cardetails" element={<CarDetails />} />
+                    <Route path="clothingdetails" element={<ClothingDetails />} />
+
           <Route path="forget-password" element={<ForgetPassword />} />
 
         </Route>
