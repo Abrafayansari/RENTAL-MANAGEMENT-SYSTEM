@@ -1,6 +1,7 @@
 package RMS.Services;
 
 import RMS.Classes.Car;
+import RMS.Exception.ResourceNotFoundException;
 import RMS.Repository.Car_repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

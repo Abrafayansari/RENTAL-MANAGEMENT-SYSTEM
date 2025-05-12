@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface Property_repo extends MongoRepository<Property,Long> {
     List<Property> findByItemNameContainingIgnoreCase(String itemName);
+
+//    List<Property> findByLocationIgnoreCaseAndPropertyTypeIgnoreCaseAndBedrooms(String location, String propertyType, int bedrooms);
 }

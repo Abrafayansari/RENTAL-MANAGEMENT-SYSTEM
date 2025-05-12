@@ -1,6 +1,7 @@
 package RMS.Controller;
 
 import RMS.Classes.*;
+import RMS.Exception.ResourceNotFoundException;
 import RMS.Services.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bson.types.ObjectId;
@@ -120,19 +121,28 @@ return user_service.login(login.getEmail(),login.getPassword());
         return car_service.searchCarsByName(name);
     }
 
+//    @GetMapping("/search-cars")
+//    public ResponseEntity<List<Car>> searchCars(@RequestParam String brand,
+//                                                @RequestParam String model,
+//                                                @RequestParam String location) throws ResourceNotFoundException {
+//
+//        List<Car> cars = item_service.searchCars(brand, model, location);
+//        return ResponseEntity.ok(cars);
+//    }
+
     ///////////////////clothing////////////////
 
     @Autowired
     Clothing_Service clothing_service;
 
-//    @PostMapping("/upload-clothing")
-//    public Clothing upload_clothes(@RequestBody Clothing c){
-//        clothing_service.upload_clothing(c);
-//        return c;
-//    }
+    @PostMapping("/upload-clothing")
+    public Clothing upload_clothes(@RequestBody Clothing c){
+        clothing_service.upload_clothing(c);
+        return c;
+    }
 
     @GetMapping("/findAll-clothing")
-    public List<Clothing> findcloth(){
+    public List<Clothing> findCloth(){
         return clothing_service.findcloth();
     }
 
@@ -152,6 +162,15 @@ return user_service.login(login.getEmail(),login.getPassword());
     public List<Clothing> searchClothingByName(@RequestParam String name) {
         return clothing_service.searchClothesByName(name);
     }
+
+//    @GetMapping("/search")
+//    public ResponseEntity<List<Clothing>> searchClothing(@RequestParam String size,
+//                                                        @RequestParam String type,
+//                                                        @RequestParam String location) throws ResourceNotFoundException {
+//
+//        List<Clothing> results = clothing_service.searchClothing(size, type, location);
+//        return ResponseEntity.ok(results);
+//    }
 
     ///////////////////Property////////////////
 
@@ -180,6 +199,16 @@ return user_service.login(login.getEmail(),login.getPassword());
     public List<Property> searchPropertyByName(@RequestParam String name) {
         return property_service.searchPropertiesByName(name);
     }
+
+//    @GetMapping("/search")
+//    public ResponseEntity<List<Property>> searchProperties(
+//            @RequestParam String location,
+//            @RequestParam String propertyType,
+//            @RequestParam int bedrooms) throws ResourceNotFoundException {
+//
+//        List<Property> results = property_service.searchProperties(location, propertyType, bedrooms);
+//        return ResponseEntity.ok(results);
+//    }
 
     /// ////////////////////Item////////////////
     @Autowired
